@@ -18,12 +18,7 @@ public class MainMenu {
 
     @FXML
     public void init() {
-        Image icon = new Image("croco.png");
-        Spawner spawner = new Spawner(icon);
-        spawner.relocate(200, 200);
-        spawner.load();
 
-        pane.getChildren().add(spawner);
     }
 
 
