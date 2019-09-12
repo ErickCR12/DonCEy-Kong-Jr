@@ -41,7 +41,7 @@ public class Spawner extends Pane {
 
         for (int i = 0; i < buttonsCount; i++) {
             // Creates the button
-            Button button = new Button(String.valueOf(i + 1));
+            JFXButton button = new JFXButton(String.valueOf(i + 1));
             button.getStylesheets().add(css);
 
             hBox.getChildren().add(button);
