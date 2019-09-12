@@ -2,8 +2,6 @@ package ui.widgets;
 
 
 import com.jfoenix.controls.JFXButton;
-import javafx.geometry.Pos;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -41,8 +39,10 @@ public class Spawner extends Pane {
 
         for (int i = 0; i < buttonsCount; i++) {
             // Creates the button
+            Integer finalI = i;
             JFXButton button = new JFXButton(String.valueOf(i + 1));
             button.getStylesheets().add(css);
+            button.setOnMousePressed(event -> mouseEvent(finalI));
 
             hBox.getChildren().add(button);
         }
@@ -58,5 +58,9 @@ public class Spawner extends Pane {
         imgView.setFitHeight(iconHeight);
 
         getChildren().add(imgView);
+    }
+
+    private void mouseEvent(Integer button) {
+        System.out.printf("Spawner button pressed: %d \n", button);
     }
 }
