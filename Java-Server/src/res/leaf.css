@@ -49,6 +49,19 @@
     -fx-background-color: black-mate;
 }
 
+.radio-button {
+    -fx-text-fill: black-mate;
+    -fx-background-color: dark-green;
+    -fx-alignment: center;
+    -fx-font-weight: bold;
+    -fx-font-size: 24px;
+    -fx-font-family: Montserrat;
+    -fx-background-radius: 18px;
+    -fx-min-width: 120;
+    -fx-min-height: 40;
+    -fx-padding: 10;
+}
+
 /** Tab **/
 .tab {
     -fx-background-color: light-green;
