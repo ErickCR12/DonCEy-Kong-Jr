@@ -1,0 +1,80 @@
+/** Colors definition **/
+* {
+    dark-green: #88C399;
+    light-green: #B9F6CA;
+    black-mate: #383838;
+    white-mate: #E8E8E8;
+    light-grey: #cfcfcf;
+}
+
+.root {
+    -fx-background-color: white-mate;
+    -fx-pref-width: 500px;
+    -fx-pref-height: 500px;
+}
+
+
+/** Labels **/
+.label {
+    -fx-text-fill: black-mate;
+    -fx-alignment: center;
+    -fx-font-weight: bold;
+    -fx-font-family: Montserrat;
+}
+
+.primary-label {
+    -fx-background-color: dark-green;
+    -fx-font-size: 36px;
+}
+
+.secondary-label {
+    -fx-font-size: 24px;
+}
+
+/** Buttons **/
+.button {
+    -fx-text-fill: black-mate;
+    -fx-background-color: dark-green;
+    -fx-alignment: center;
+    -fx-font-weight: bold;
+    -fx-font-size: 24px;
+    -fx-font-family: Montserrat;
+    -fx-background-radius: 6px;
+    -fx-pref-width: 40px;
+    -fx-pref-height: 48px;
+}
+
+.button:hover {
+    -fx-text-fill: dark-green;
+    -fx-background-color: black-mate;
+}
+
+/** Tab **/
+.tab {
+    -fx-background-color: light-green;
+    -fx-text-fill: black-mate;
+    -fx-alignment: center;
+    -fx-font-weight: bold;
+    -fx-font-family: Montserrat;
+    -fx-min-width: 100px;
+    -fx-font-size: 36px;
+}
+.tab-header-background {
+    -fx-background-color: light-green;
+}
+
+.tab:selected{
+    -fx-background-color: dark-green;
+}
+
+/** Custom **/
+.game-view {
+    -fx-background-color: dark-green;
+    -fx-background-radius: 4px;
+}
+
+.spawner {
+    -fx-background-color: light-grey;
+    -fx-background-radius: 4px;
+    -fx-alignment: center-left;
+}
