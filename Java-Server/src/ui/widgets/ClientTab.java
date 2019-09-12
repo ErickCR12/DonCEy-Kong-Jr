@@ -55,6 +55,6 @@ public class ClientTab extends Tab {
     }
 
     private void autoButtonPressed(Boolean selected) {
-        System.out.printf("Auto button status: %b \n", selected);
+        System.out.println(selected);
     }
 }
