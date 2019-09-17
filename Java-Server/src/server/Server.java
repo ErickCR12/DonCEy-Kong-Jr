@@ -7,15 +7,15 @@ public class Server {
 
     private Server instance;
     private ServerSocket serverSocket;
-    private int ip;
-    private int port;
+    private Integer ip;
+    private Integer port;
 
-    private Server(int port) {
+    private Server(Integer port) {
         this.ip = 0;
         this.port = port;
     }
 
-    public Server getInstance(int port) {
+    public Server getInstance(Integer port) {
         if (instance == null) instance = new Server(port);
         return instance;
     }
@@ -36,11 +36,11 @@ public class Server {
         serverSocket.close();
     }
 
-    public int getIp() {
+    public Integer getIp() {
         return ip;
     }
 
-    public int getPort() {
+    public Integer getPort() {
         return port;
     }
 }
