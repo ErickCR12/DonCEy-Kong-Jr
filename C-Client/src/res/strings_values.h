@@ -8,5 +8,7 @@
 #define SOCKET_ERROR "ERROR Socket creation error \n"
 #define ADDRESS_ERROR "ERROR Invalid address \n"
 #define CONNECTION_ERROR "ERROR Connection error \n"
+#define CLIENT_START "Client starting... \n"
+#define CLIENT_STOP "Client stopping... \n"
 
 #endif //C_CLIENT_STRINGS_VALUES_H

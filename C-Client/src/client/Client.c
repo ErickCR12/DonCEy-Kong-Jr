@@ -5,14 +5,15 @@
 #include "Client.h"
 
 void start() {
-    server_address = (struct sockaddr_in *) malloc(sizeof(struct sockaddr_in));
+    printf(CLIENT_START);
     sock = createSocket();
-    serverAddress(server_address);
+    server_address = serverAddress(server_address);
     connectServer(sock, server_address);
 }
 
 void stop() {
-    free(server_address);
+    printf(CLIENT_STOP);
+    close(sock);
 }
 
 int createSocket() {
@@ -21,17 +22,20 @@ int createSocket() {
     return status;
 }
 
-int serverAddress(struct sockaddr_in *serverAddress) {\
-    int status = 0;
-    serverAddress->sin_family = AF_INET;
-    serverAddress->sin_port = htons(PORT);
-    serverAddress->sin_addr.s_addr = inet_addr(IP);
+struct sockaddr_in serverAddress(struct sockaddr_in serverAddress) {
+    serverAddress.sin_family = AF_INET;
+    serverAddress.sin_port = htons(PORT);
 
-    return status;
+    if(inet_pton(AF_INET, IP, &serverAddress.sin_addr) <= 0)
+    {
+        printf(ADDRESS_ERROR);
+    }
+
+    return serverAddress;
 }
 
-int connectServer(int socket, struct sockaddr_in *serverAddress) {
-    int status = connect(socket,  (struct sockaddr *) &serverAddress, sizeof(serverAddress));
+int connectServer(int socket, struct sockaddr_in serverAddress) {
+    int status = connect(socket, (struct sockaddr *) &serverAddress, sizeof(serverAddress));
     if (status < 0) {
         printf(CONNECTION_ERROR);
         status = -1;
@@ -40,12 +44,13 @@ int connectServer(int socket, struct sockaddr_in *serverAddress) {
 }
 
 void sendMessage(char *message) {
-    send(sock, message, strlen(message), 0);
-    printf("Client send: %s", message);
+    write(sock, message, strlen(message));
+    printf("Client send: %s \n", message);
 }
 
-char *readMessage(char *message) {
+char *readMessage() {
+    char message[MAX];
     read(sock, message, sizeof(message));
-    printf("Client read: %s", message);
+    printf("Client read: %s \n", message);
     return message;
 }

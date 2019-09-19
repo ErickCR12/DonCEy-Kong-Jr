@@ -6,12 +6,12 @@
 #include "client/Client.h"
 
 int main() {
-    printf("Hello, World!\n");
 
     start();
 
-    char message[] = "Hello";
+    char message[] = "exit";
     sendMessage(message);
+    stop();
 
     return 0;
 }
