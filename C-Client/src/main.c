@@ -3,8 +3,15 @@
 //
 
 #include <stdio.h>
+#include "client/Client.h"
 
 int main() {
     printf("Hello, World!\n");
+
+    start();
+
+    char message[] = "Hello";
+    sendMessage(message);
+
     return 0;
 }
