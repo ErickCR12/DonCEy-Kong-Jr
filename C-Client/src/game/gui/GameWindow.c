@@ -36,8 +36,8 @@ ALLEGRO_EVENT_QUEUE* setEventQueue(ALLEGRO_DISPLAY *gameWindowDisplay, ALLEGRO_T
 void createJunior(){
     junior = (Junior*) malloc(sizeof(Junior));
     junior->entity = (Entity*) malloc(sizeof(Entity));
-    junior->entity->x = 0;
-    junior->entity->y = GW_HEIGHT - JR_HEIGHT;
+    junior->entity->x = 120;
+    junior->entity->y = 20;
     junior->entity->bitmap = setBitmap("../sprites/jr.png");
     drawBitmap(junior->entity);
 }
@@ -71,6 +71,7 @@ void gameLoop(ALLEGRO_EVENT_QUEUE *eventQueue){
 
         moveJrRight(junior, keyState);
         moveJrLeft(junior, keyState);
+        moveJrDown(junior, keyState);
     }
 }
 
@@ -82,7 +83,6 @@ int eventManager(ALLEGRO_EVENT_QUEUE *eventQueue){
             return FALSE;
         if(event.type == ALLEGRO_EVENT_TIMER) {
             redrawDisplay();
-            al_flip_display();
         }
     }
     return TRUE;
@@ -92,6 +92,7 @@ void redrawDisplay(){
     al_clear_to_color(al_map_rgb(0, 0, 0));
     drawBitmap(platform->entity);
     drawBitmap(junior->entity);
+    al_flip_display();
 }
 void closeGameWindow(ALLEGRO_DISPLAY *gameWindowDisplay, ALLEGRO_EVENT_QUEUE *eventQueue){
     al_destroy_display(gameWindowDisplay);

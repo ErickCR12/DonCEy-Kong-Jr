@@ -15,5 +15,5 @@ struct Junior {
 
 void moveJrRight(Junior *junior, ALLEGRO_KEYBOARD_STATE keyState);
 void moveJrLeft(Junior *junior, ALLEGRO_KEYBOARD_STATE keyState);
-
+void moveJrDown(Junior *junior, ALLEGRO_KEYBOARD_STATE keyState);
 #endif //C_CLIENT_JUNIOR_H
