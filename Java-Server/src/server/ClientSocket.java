@@ -1,9 +1,6 @@
 package server;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.Socket;
 
 class ClientSocket extends Thread {
@@ -37,9 +34,9 @@ class ClientSocket extends Thread {
         try {
             while ((message = in.readLine()) != null) {
                 System.out.printf("Server received: %s \n", message);
+                out.println(message);
 
                 if (message.equals("exit")) break;
-                out.println(message);
             }
             stopListening();
 
