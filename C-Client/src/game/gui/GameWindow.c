@@ -71,7 +71,7 @@ void gameLoop(ALLEGRO_EVENT_QUEUE *eventQueue){
 
         moveJrRight(junior, keyState);
         moveJrLeft(junior, keyState);
-        moveJrDown(junior, keyState);
+        moveJrDown(junior, platform);
     }
 }
 

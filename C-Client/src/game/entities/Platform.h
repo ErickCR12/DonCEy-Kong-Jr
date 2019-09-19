@@ -9,8 +9,8 @@
 #include "Entity.h"
 typedef struct {
     Entity *entity;
-    int width;
-    int height;
+    float width;
+    float height;
 } Platform
 ;
 
