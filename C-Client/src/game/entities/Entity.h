@@ -14,7 +14,7 @@ typedef struct {
     int y;
 } Entity;
 
-int collide(Entity entity);
+int collide(Entity);
 
 void kill();
 

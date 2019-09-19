@@ -4,7 +4,7 @@
 
 #include "Entity.h"
 
-int collide() {
+int collide(Entity entity) {
     return FALSE;
 }
 
