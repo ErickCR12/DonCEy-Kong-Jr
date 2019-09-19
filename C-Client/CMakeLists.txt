@@ -12,7 +12,11 @@ add_executable(C-Client
         src/game/entities/Fruit.h
         src/game/entities/Croco.h
         src/game/entities/Platform.h
-        src/game/entities/Rope.h)
+        src/game/entities/Rope.h
+        src/game/gui/GameWindow.h
+        src/game/gui/GameWindow.c
+        src/game/gui/KeyHandler.h
+        src/game/gui/KeyHandler.c)
 
 target_link_libraries(C-Client -lmingw32 -lallegro-5.0.10-monolith-md-debug)
 
