@@ -3,9 +3,9 @@ package server;
 import java.io.IOException;
 import java.net.ServerSocket;
 
-public class Server {
+public class Server extends Thread {
 
-    private Server instance;
+    private static Server instance;
     private ServerSocket serverSocket;
     private Integer ip;
     private Integer port;
@@ -15,14 +15,19 @@ public class Server {
         this.port = port;
     }
 
-    public Server getInstance(Integer port) {
+    public static Server getInstance(Integer port) {
         if (instance == null) instance = new Server(port);
         return instance;
     }
 
-    public void start() throws IOException {
-        serverSocket = new ServerSocket(port);
-        startListening();
+    @Override
+    public void run() {
+        try {
+            serverSocket = new ServerSocket(port);
+            startListening();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void startListening() throws IOException {
@@ -30,10 +35,6 @@ public class Server {
             new ClientSocket(serverSocket.accept())
                     .start();
         }
-    }
-
-    public void stop() throws IOException {
-        serverSocket.close();
     }
 
     public Integer getIp() {
