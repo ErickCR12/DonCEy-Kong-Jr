@@ -9,8 +9,10 @@ int main() {
 
     start();
 
-    char message[] = "exit";
-    sendMessage(message);
+    char mess[] = "HI";
+    message(mess);
+
+    sleep(2);
     stop();
 
     return 0;

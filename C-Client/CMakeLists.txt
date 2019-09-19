@@ -15,3 +15,6 @@ add_executable(C-Client
         src/game/entities/Croco.h
         src/game/entities/Platform.h
         src/game/entities/Rope.h src/client/Client.h src/res/strings_values.h)
+
+# build
+target_link_libraries(C-Client ws2_32)

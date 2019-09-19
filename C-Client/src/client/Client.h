@@ -7,28 +7,32 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <sys/socket.h>
-#include <arpa/inet.h>
+#include <winsock.h>
 #include <unistd.h>
 #include <string.h>
 #include "../res/strings_values.h"
 
-#define IP "10.0.2.2"
+#define IP "127.0.0.1"
 #define PORT 9999
 #define MAX 1024
 
-int sock;
+WSADATA *wsa;
+SOCKET sock;
 struct sockaddr_in server_address;
 
 void start();
 
 void stop();
 
-int createSocket();
+void initWinSock();
+
+SOCKET createSocket();
 
 struct sockaddr_in serverAddress(struct sockaddr_in);
 
-int connectServer(int , struct sockaddr_in);
+int connectServer(SOCKET , struct sockaddr_in);
+
+char *message(char *);
 
 void sendMessage(char *);
 

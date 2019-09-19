@@ -6,40 +6,48 @@ import java.net.Socket;
 class ClientSocket extends Thread {
 
     private Socket socket;
-    private PrintWriter out;
-    private BufferedReader in;
+    private DataOutputStream out;
+    private DataInputStream in;
 
     ClientSocket(Socket socket) {
         this.socket = socket;
     }
 
     public void start() {
-        System.out.println("Client running...");
+        System.out.println("Client accepted");
         startIOStream();
         startListening();
     }
 
     private void startIOStream() {
         try {
-            out = new PrintWriter(socket.getOutputStream(), true);
-            in = new BufferedReader(
-                    new InputStreamReader(socket.getInputStream()));
+            out = new DataOutputStream(socket.getOutputStream());
+            in = new DataInputStream(
+                    new BufferedInputStream(socket.getInputStream()));
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     private void startListening() {
-        String message;
+        String message = "";
         try {
-            while ((message = in.readLine()) != null) {
+            while (!message.equals("exit")) {
+                message = in.readUTF();
                 System.out.printf("Server received: %s \n", message);
-                out.println(message);
-
-                if (message.equals("exit")) break;
+                response(message);
             }
             stopListening();
 
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void response(String message) {
+        try {
+            out.writeUTF(message);
+            System.out.printf("Server send: %s \n", message);
         } catch (IOException e) {
             e.printStackTrace();
         }
