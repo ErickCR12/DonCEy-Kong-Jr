@@ -36,6 +36,8 @@ class ClientSocket extends Thread {
         String message;
         try {
             while ((message = in.readLine()) != null) {
+                System.out.printf("Server received: %s \n", message);
+
                 if (message.equals("exit")) break;
                 out.println(message);
             }
@@ -47,6 +49,7 @@ class ClientSocket extends Thread {
     }
 
     private void stopListening() throws IOException {
+        System.out.println("Client closing...");
         in.close();
         out.close();
         socket.close();
