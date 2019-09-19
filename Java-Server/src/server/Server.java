@@ -23,6 +23,7 @@ public class Server extends Thread {
     @Override
     public void run() {
         try {
+            System.out.println("Server running...");
             serverSocket = new ServerSocket(port);
             startListening();
         } catch (IOException e) {

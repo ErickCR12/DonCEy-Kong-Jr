@@ -17,6 +17,7 @@ class ClientSocket extends Thread {
     }
 
     public void start() {
+        System.out.println("Client running...");
         startIOStream();
         startListening();
     }
