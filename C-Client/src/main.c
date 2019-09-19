@@ -3,25 +3,25 @@
 //
 
 #include <stdio.h>
-#include <gtk/gtk.h>
-
-static void activate (GtkApplication* app, gpointer user_data){
-    GtkWidget *window;
-
-    window = gtk_application_window_new (app);
-    gtk_window_set_title (GTK_WINDOW (window), "Window");
-    gtk_window_set_default_size (GTK_WINDOW (window), 200, 200);
-    gtk_widget_show_all (window);
-}
+#include <allegro5/allegro.h>
+#include <allegro5/allegro_native_dialog.h>
+#include <unistd.h>
 
 int main (int argc, char **argv){
-    GtkApplication *app;
-    int status;
+    ALLEGRO_DISPLAY *display = NULL;
 
-    app = gtk_application_new ("org.gtk.example", G_APPLICATION_FLAGS_NONE);
-    g_signal_connect (app, "activate", G_CALLBACK (activate), NULL);
-    status = g_application_run (G_APPLICATION (app), argc, argv);
-    g_object_unref (app);
+    if (!al_init()){
+        al_show_native_message_box(NULL, NULL, NULL, "failed to init allegro!", NULL, 0);
+        return -1;
+    }
+    display = al_create_display(600, 600);
+    if (!display){
+        al_show_native_message_box(NULL, NULL, NULL, "failed to init display!", NULL, 0);
+        return -1;
+    }
 
-    return status;
+    sleep(5);
+
+    al_destroy_display(display);
+    return 0;
 }
