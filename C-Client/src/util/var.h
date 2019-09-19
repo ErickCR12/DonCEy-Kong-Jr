@@ -12,6 +12,5 @@
 #define GW_HEIGHT 600
 #define JR_HEIGHT 16
 #define FPS 60
-#define MOV_SPEED 0.1f
-
+#define MOV_SPEED 0.0015f
 #endif //C_CLIENT_VAR_H

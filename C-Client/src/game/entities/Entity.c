@@ -5,9 +5,7 @@
 #include "Entity.h"
 
 void drawBitmap(Entity *entity){
-    al_clear_to_color(al_map_rgb(0, 0, 0));
-    al_draw_bitmap(entity->bitmap, entity->x, GW_HEIGHT-JR_HEIGHT, 0);
-    al_flip_display();
+    al_draw_bitmap(entity->bitmap, entity->x, entity->y, 0);
 }
 
 int collide(Entity entity) {

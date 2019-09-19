@@ -8,7 +8,9 @@
 #include "../../util/var.h"
 #include "Entity.h"
 typedef struct {
-    Entity entity;
+    Entity *entity;
+    int width;
+    int height;
 } Platform
 ;
 
