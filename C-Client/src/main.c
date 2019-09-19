@@ -7,14 +7,13 @@
 #include "client/Client.h"
 
 int main(){
+    // Client
+    //start();
+
+    // Game
     createGameWindow();
 
-    # Client
-    start();
-
-    char mess[] = "HI";
-    message(mess);
-    sleep(2);
+    // Client Close
     stop();
 
     return 0;
