@@ -7,12 +7,16 @@
 
 #include <stdlib.h>
 #include "../../util/var.h"
+#include <allegro5/allegro.h>
 
 typedef struct {
     int id;
-    int x;
-    int y;
+    float x;
+    float y;
+    ALLEGRO_BITMAP *bitmap;
 } Entity;
+
+void drawBitmap(Entity *entity);
 
 int collide(Entity);
 

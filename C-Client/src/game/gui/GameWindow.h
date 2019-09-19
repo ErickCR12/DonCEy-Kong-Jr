@@ -8,12 +8,14 @@
 #include <allegro5/allegro.h>
 #include <allegro5\allegro_image.h>
 #include "../../util/var.h"
+#include "../entities/Junior.h"
 
 void createGameWindow();
 ALLEGRO_EVENT_QUEUE* setEventQueue(ALLEGRO_DISPLAY *gameWindowDisplay, ALLEGRO_TIMER *timer);
-ALLEGRO_BITMAP* setBitmap();
-void gameLoop(ALLEGRO_EVENT_QUEUE *eventQueue, ALLEGRO_BITMAP *jrBitmap);
-int eventManager(ALLEGRO_EVENT_QUEUE *eventQueue, ALLEGRO_BITMAP *jrBitmap, float x);
-void closeGameWindow(ALLEGRO_DISPLAY *gameWindowDisplay, ALLEGRO_EVENT_QUEUE *eventQueue, ALLEGRO_BITMAP *jrBitmap);
+Junior createJunior();
+ALLEGRO_BITMAP* setBitmap(char* imgPath);
+void gameLoop(ALLEGRO_EVENT_QUEUE *eventQueue, Junior *junior);
+int eventManager(ALLEGRO_EVENT_QUEUE *eventQueue, Junior *junior);
+void closeGameWindow(ALLEGRO_DISPLAY *gameWindowDisplay, ALLEGRO_EVENT_QUEUE *eventQueue, Junior *junior);
 
 #endif //C_CLIENT_GAMEWINDOW_H

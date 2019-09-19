@@ -2,7 +2,7 @@
 // Created by Erick Barrantes on 9/19/2019.
 //
 #include "GameWindow.h"
-#include "KeyHandler.h"
+
 
 void createGameWindow(){
     ALLEGRO_DISPLAY *gameWindowDisplay;
@@ -11,16 +11,15 @@ void createGameWindow(){
 
     ALLEGRO_TIMER *timer = NULL;
     timer = al_create_timer(1.0 / FPS);
-
+    al_start_timer(timer);
 
     ALLEGRO_EVENT_QUEUE *eventQueue = setEventQueue(gameWindowDisplay, timer);
 
-    ALLEGRO_BITMAP *jrBitmap = setBitmap();
+    Junior junior = createJunior();
 
-    al_start_timer(timer);
-    gameLoop(eventQueue, jrBitmap);
+    gameLoop(eventQueue, &junior);
 
-    closeGameWindow(gameWindowDisplay, eventQueue, jrBitmap);
+    closeGameWindow(gameWindowDisplay, eventQueue, &junior);
 }
 
 ALLEGRO_EVENT_QUEUE* setEventQueue(ALLEGRO_DISPLAY *gameWindowDisplay, ALLEGRO_TIMER *timer){
@@ -33,44 +32,53 @@ ALLEGRO_EVENT_QUEUE* setEventQueue(ALLEGRO_DISPLAY *gameWindowDisplay, ALLEGRO_T
     return eventQueue;
 }
 
-ALLEGRO_BITMAP* setBitmap(){
-    ALLEGRO_BITMAP *jrBitmap = NULL;
-    al_init_image_addon();
-    jrBitmap = al_load_bitmap("../sprites/jr.png");
-    assert(jrBitmap != NULL);
-    drawBitmap(jrBitmap, 0);
-    return jrBitmap;
+Junior createJunior(){
+    Junior junior;
+    junior.entity = (Entity*) malloc(sizeof(Entity));
+    junior.entity->x = 0;
+    junior.entity->y = GW_HEIGHT - JR_HEIGHT;
+    junior.entity->bitmap = setBitmap("../sprites/jr.png");
+    drawBitmap(junior.entity);
+    return junior;
 }
 
-void gameLoop(ALLEGRO_EVENT_QUEUE *eventQueue, ALLEGRO_BITMAP *jrBitmap){
+ALLEGRO_BITMAP* setBitmap(char* imgPath){
+    ALLEGRO_BITMAP *bitmap = NULL;
+    al_init_image_addon();
+    bitmap = al_load_bitmap(imgPath);
+    assert(bitmap != NULL);
+    return bitmap;
+}
+
+void gameLoop(ALLEGRO_EVENT_QUEUE *eventQueue, Junior *junior){
     int running = TRUE;
-    float x = 0;
     ALLEGRO_KEYBOARD_STATE keyState;
     while (running) {
-        running = eventManager(eventQueue, jrBitmap, x);
+        running = eventManager(eventQueue, junior);
 
         al_get_keyboard_state(&keyState);
 
-        RightKeyPressed(keyState, jrBitmap, &x);
-        LeftKeyPressed(keyState, jrBitmap, &x);
+        moveJrRight(junior, keyState);
+        moveJrLeft(junior, keyState);
     }
 }
 
-int eventManager(ALLEGRO_EVENT_QUEUE *eventQueue, ALLEGRO_BITMAP *jrBitmap, float x){
+int eventManager(ALLEGRO_EVENT_QUEUE *eventQueue, Junior *junior){
     ALLEGRO_EVENT event;
     if (!al_is_event_queue_empty(eventQueue)) {
         al_wait_for_event(eventQueue, &event);
         if (event.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
             return FALSE;
         if(event.type == ALLEGRO_EVENT_TIMER)
-            drawBitmap(jrBitmap, x);
+            drawBitmap(junior->entity);
     }
     return TRUE;
 }
 
-void closeGameWindow(ALLEGRO_DISPLAY *gameWindowDisplay, ALLEGRO_EVENT_QUEUE *eventQueue, ALLEGRO_BITMAP *jrBitmap){
+void closeGameWindow(ALLEGRO_DISPLAY *gameWindowDisplay, ALLEGRO_EVENT_QUEUE *eventQueue, Junior* junior){
     al_destroy_display(gameWindowDisplay);
     al_uninstall_keyboard();
-    al_destroy_bitmap(jrBitmap);
+    al_destroy_bitmap(junior->entity->bitmap);
     al_destroy_event_queue(eventQueue);
+    free(junior);
 }
