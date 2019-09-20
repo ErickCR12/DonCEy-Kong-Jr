@@ -8,6 +8,7 @@ void createGameWindow(){
     ALLEGRO_DISPLAY *gameWindowDisplay;
     al_init();
     gameWindowDisplay = al_create_display(GW_WIDTH, GW_HEIGHT);
+    al_init_image_addon();
 
     ALLEGRO_TIMER *timer = NULL;
     timer = al_create_timer(1.0 / FPS);
@@ -67,7 +68,6 @@ void createPlatforms(){
 
 ALLEGRO_BITMAP* setBitmap(char* imgPath){
     ALLEGRO_BITMAP *bitmap = NULL;
-    al_init_image_addon();
     bitmap = al_load_bitmap(imgPath);
     assert(bitmap != NULL);
     return bitmap;
@@ -90,9 +90,8 @@ void gameLoop(ALLEGRO_EVENT_QUEUE *eventQueue){
         if(!jumping) falling = moveJrDown(junior, platforms);
         if(!falling) jumping = moveJrUp(junior, keyState, &jumpCount, jumping, platforms);
         timer++;
-        if(junior->entity->y > GW_HEIGHT){
+        if(junior->entity->y > GW_HEIGHT)
             playing = false;
-        }
         if (timer > 30000) {
             clientUpdate();
             timer = 0;
