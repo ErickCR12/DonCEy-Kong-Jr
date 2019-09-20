@@ -46,15 +46,13 @@ void createJunior(){
 }
 
 void createPlatforms(){
-    float x = 100;
-    float y = 100;
     //float width[] = {100, 50, 30, 200, 150};
     platforms = (Platform**) malloc(sizeof(Platform*));
     for(int i = 0; i < AMOUNT_OF_PLATFORMS; i++) {
         platforms[i] = (Platform*) malloc(sizeof(Platform));
         platforms[i]->entity = (Entity *) malloc(sizeof(Entity));
-        platforms[i]->entity->x = x;
-        platforms[i]->entity->y = y;
+        platforms[i]->entity->x = PLATFORM_X_POS[i];
+        platforms[i]->entity->y = PLATFORM_Y_POS[i];
         platforms[i]->entity->type = "platform";
         platforms[i]->entity->bitmap = setBitmap("../sprites/platform.png");
         platforms[i]->width = PLATFORM_WIDTH;
@@ -64,8 +62,6 @@ void createPlatforms(){
         //pushEntity(platforms[i]->entity);
 //        al_draw_scaled_bitmap(platforms[i]->entity->bitmap, x, y, PLATFORM_WIDTH, PLATFORM_HEIGHT,
 //                                                            x, y, platforms[i]->width, platforms[i]->height, 0);
-        x += 170;
-        y += 30;
     }
 }
 
@@ -82,6 +78,7 @@ void gameLoop(ALLEGRO_EVENT_QUEUE *eventQueue){
     float jumpCount = 0.0f;
     int jumping = FALSE;
     int timer = 0;
+    int falling = FALSE;
     ALLEGRO_KEYBOARD_STATE keyState;
     while (playing) {
         playing = eventManager(eventQueue);
@@ -90,14 +87,14 @@ void gameLoop(ALLEGRO_EVENT_QUEUE *eventQueue){
 
         moveJrRight(junior, keyState);
         moveJrLeft(junior, keyState);
-        if(!jumping) moveJrDown(junior, platforms);
-        jumping = moveJrUp(junior, keyState, &jumpCount, jumping, platforms);
+        if(!jumping) falling = moveJrDown(junior, platforms);
+        if(!falling) jumping = moveJrUp(junior, keyState, &jumpCount, jumping, platforms);
 
-        timer++;
-        if (timer > 30000) {
-            clientUpdate();
-            timer = 0;
-        }
+//        timer++;
+//        if (timer > 30000) {
+//            clientUpdate();
+//            timer = 0;
+//        }
     }
 }
 

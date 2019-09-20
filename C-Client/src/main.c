@@ -9,11 +9,11 @@
 
 int main(){
     // Some Initializations
-    WSADATA wsa;
-    WSAStartup(MAKEWORD(2,2),&wsa);
-    length = 0;
-    srand(time(NULL));
-    id = rand();
+//    WSADATA wsa;
+//    WSAStartup(MAKEWORD(2,2),&wsa);
+//    length = 0;
+//    srand(time(NULL));
+//    id = rand();
 
     // Game
     createGameWindow();

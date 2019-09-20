@@ -32,7 +32,7 @@ int moveJrUp(Junior *junior, ALLEGRO_KEYBOARD_STATE keyState, float *jumpCount, 
         }
     }else{
         int falling = TRUE;
-        if(*jumpCount < 75) {
+        if(*jumpCount < JUMP_HEIGHT) {
             junior->entity->y -= MOV_SPEED;
             *jumpCount += MOV_SPEED;
         }else
