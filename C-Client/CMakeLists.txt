@@ -9,7 +9,12 @@ add_executable(C-Client
         src/util/var.h
         src/res/strings_values.h
 
+        src/client/Client.h
         src/client/Client.c
+        src/lib/json.h
+        src/lib/json.c
+        src/lib/json-builder.h
+        src/lib/json-builder.c
 
         src/game/entities/Entity.c
         src/game/entities/Fruit.h
@@ -20,7 +25,9 @@ add_executable(C-Client
         src/game/entities/Junior.c
 
         src/game/gui/GameWindow.h
-        src/game/gui/GameWindow.c src/game/gui/CollisionHandler.c src/game/gui/CollisionHandler.h)
+        src/game/gui/GameWindow.c
+        src/game/gui/CollisionHandler.c
+        src/game/gui/CollisionHandler.h)
 
 
 # build

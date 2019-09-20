@@ -51,6 +51,7 @@ void sendMessage(char *message) {
     if (send(sock, message, strlen(message), 0) < 0)
         printf(CLIENT_SEND_FAILED);
     else printf("Client send: %s \n", message);
+    send(sock, "\n", strlen("\n"), 0);
 }
 
 char *readMessage() {

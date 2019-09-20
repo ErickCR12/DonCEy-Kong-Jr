@@ -8,6 +8,8 @@
 #include <stdlib.h>
 #include "../../util/var.h"
 #include <allegro5/allegro.h>
+#include "../../lib/json.h"
+#include "../../lib/json-builder.h"
 
 typedef struct {
     int id;
@@ -25,5 +27,9 @@ int collide(Entity);
 void kill();
 
 void updateRPoss(Entity *entity);
+
+char *serialize(Entity *);
+
+void parse(char *, Entity *);
 
 #endif //C_CLIENT_ENTITY_H
