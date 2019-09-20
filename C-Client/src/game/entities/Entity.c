@@ -15,3 +15,8 @@ int collide(Entity entity) {
 void kill() {
 
 }
+
+void updateRPoss(Entity *entity) {
+    entity->rx = entity->x / GW_WIDTH;
+    entity->ry = entity->y / GW_HEIGHT;
+}

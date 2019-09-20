@@ -13,6 +13,8 @@ typedef struct {
     int id;
     float x;
     float y;
+    float rx;
+    float ry;
     ALLEGRO_BITMAP *bitmap;
 } Entity;
 
@@ -21,5 +23,7 @@ void drawBitmap(Entity *entity);
 int collide(Entity);
 
 void kill();
+
+void updateRPoss(Entity *entity);
 
 #endif //C_CLIENT_ENTITY_H
