@@ -36,7 +36,7 @@ public class GameView extends Pane {
             float x = entity.getRx() * width;
             float y = entity.getRy() * height;
 
-            ImageView monkey = new ImageView("fruit.png");
+            ImageView monkey = new ImageView("monkey.png");
             monkey.relocate(x, y);
             monkey.setFitWidth(50);
             monkey.setFitHeight(50);
