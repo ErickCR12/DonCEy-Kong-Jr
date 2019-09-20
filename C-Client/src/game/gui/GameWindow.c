@@ -46,11 +46,11 @@ void createJunior(){
 }
 
 void createPlatforms(){
-    //float width[] = {100, 50, 30, 200, 150};
-    platforms = (Platform**) malloc(sizeof(Platform*));
+    platforms = (Platform**) malloc(AMOUNT_OF_PLATFORMS * sizeof(Platform*));
     for(int i = 0; i < AMOUNT_OF_PLATFORMS; i++) {
         platforms[i] = (Platform*) malloc(sizeof(Platform));
         platforms[i]->entity = (Entity *) malloc(sizeof(Entity));
+        platforms[i]->entity->id = i+1;
         platforms[i]->entity->x = PLATFORM_X_POS[i];
         platforms[i]->entity->y = PLATFORM_Y_POS[i];
         platforms[i]->entity->type = "platform";
