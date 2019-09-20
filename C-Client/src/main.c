@@ -8,12 +8,12 @@
 
 int main(){
     // Client
-    WSADATA wsa;
-    WSAStartup(MAKEWORD(2,2),&wsa);
-    message("hello \n");
+//    WSADATA wsa;
+//    WSAStartup(MAKEWORD(2,2),&wsa);
+//    message("hello \n");
 
     // Game
-    //createGameWindow();
+    createGameWindow();
 
     return 0;
 }
