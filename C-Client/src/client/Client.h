@@ -16,15 +16,12 @@
 #define PORT 9999
 #define MAX 1024
 
-WSADATA *wsa;
 SOCKET sock;
 struct sockaddr_in server_address;
 
 void start();
 
 void stop();
-
-void initWinSock();
 
 SOCKET createSocket();
 

@@ -2,12 +2,10 @@
 // Created by José Acuña on 12/09/2019.
 //
 
-#include <afxres.h>
 #include "Client.h"
 
 void start() {
     printf(CLIENT_START);
-    initWinSock();
     sock = createSocket();
     server_address = serverAddress(server_address);
     connectServer(sock, server_address);
@@ -15,14 +13,7 @@ void start() {
 
 void stop() {
     printf(CLIENT_STOP);
-    free(wsa);
     close(sock);
-}
-
-void initWinSock() {
-    wsa = malloc(sizeof(wsa));
-    if (WSAStartup(MAKEWORD(2,2),wsa) != 0)
-        printf(WINSOCK_ERROR);
 }
 
 SOCKET createSocket() {
@@ -48,8 +39,11 @@ int connectServer(SOCKET socket, struct sockaddr_in serverAddress) {
 }
 
 char *message(char *message) {
+    start();
     sendMessage(message);
-    return readMessage();
+    message = readMessage();
+    stop();
+    return message;
 }
 
 void sendMessage(char *message) {
@@ -60,7 +54,7 @@ void sendMessage(char *message) {
 
 char *readMessage() {
     char *message[MAX];
-    if (recv(sock, *message, sizeof(message), 0) == SOCKET_ERROR)
+    if (recv(sock, *message, MAX, 0) == SOCKET_ERROR)
         printf(CLIENT_READ_FAILED);
     printf("Client read: %s \n", *message);
     return *message;
