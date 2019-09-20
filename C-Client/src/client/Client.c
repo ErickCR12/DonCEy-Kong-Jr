@@ -41,7 +41,6 @@ int connectServer(SOCKET socket, struct sockaddr_in serverAddress) {
 char *message(char *message) {
     start();
     sendMessage(message);
-    sleep(1);
     message = readMessage();
     stop();
     return message;

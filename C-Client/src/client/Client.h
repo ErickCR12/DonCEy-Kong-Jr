@@ -14,7 +14,7 @@
 
 #define IP "127.0.0.1"
 #define PORT 9999
-#define MAX 1024
+#define MAX 2048
 
 SOCKET sock;
 struct sockaddr_in server_address;

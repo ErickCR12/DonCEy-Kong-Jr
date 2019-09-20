@@ -2,16 +2,20 @@
 // Created by José Acuña on 17/09/2019.
 //
 
+#include <stdlib.h>
+#include <time.h>
 #include "game/gui/GameWindow.h"
 #include "client/Client.h"
 
 int main(){
-    // Client
+    // Some Initializations
     WSADATA wsa;
     WSAStartup(MAKEWORD(2,2),&wsa);
+    length = 0;
+    srand(time(NULL));
+    id = rand();
 
     // Game
-    length = 0;
     createGameWindow();
 
     return 0;

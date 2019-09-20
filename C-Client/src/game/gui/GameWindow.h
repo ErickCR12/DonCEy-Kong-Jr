@@ -18,6 +18,7 @@
 
 Junior *junior;
 Platform **platforms;
+int id;
 
 void createGameWindow();
 ALLEGRO_EVENT_QUEUE* setEventQueue(ALLEGRO_DISPLAY *gameWindowDisplay, ALLEGRO_TIMER *timer);
@@ -29,4 +30,5 @@ int eventManager(ALLEGRO_EVENT_QUEUE *eventQueue);
 void redrawDisplay();
 void closeGameWindow(ALLEGRO_DISPLAY *gameWindowDisplay, ALLEGRO_EVENT_QUEUE *eventQueue);
 void clientUpdate();
+char *serializeGame(char *);
 #endif //C_CLIENT_GAMEWINDOW_H

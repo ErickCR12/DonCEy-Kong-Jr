@@ -81,6 +81,7 @@ void gameLoop(ALLEGRO_EVENT_QUEUE *eventQueue){
     int playing = TRUE;
     float jumpCount = 0.0f;
     int jumping = FALSE;
+    int timer = 0;
     ALLEGRO_KEYBOARD_STATE keyState;
     while (playing) {
         playing = eventManager(eventQueue);
@@ -92,7 +93,11 @@ void gameLoop(ALLEGRO_EVENT_QUEUE *eventQueue){
         if(!jumping) moveJrDown(junior, platforms);
         jumping = moveJrUp(junior, keyState, &jumpCount, jumping, platforms);
 
-        clientUpdate();
+        timer++;
+        if (timer > 30000) {
+            clientUpdate();
+            timer = 0;
+        }
     }
 }
 
@@ -133,5 +138,19 @@ void closeGameWindow(ALLEGRO_DISPLAY *gameWindowDisplay, ALLEGRO_EVENT_QUEUE *ev
 
 void clientUpdate() {
     json_char *jsonEntities = serializeEntities();
-    message(jsonEntities);
+    message(serializeGame(jsonEntities));
+}
+
+char *serializeGame(char *json) {
+    json_value *obj = json_object_new((size_t) length);
+
+    json_value *game = json_integer_new(id);
+    json_value *entities = json_string_new(json);
+
+    json_object_push(obj, "game", game);
+    json_object_push(obj, "entities", entities);
+
+    json_char *buf = malloc(json_measure(obj));
+    json_serialize(buf, obj);
+    return buf;
 }
