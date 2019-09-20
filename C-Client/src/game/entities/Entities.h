@@ -16,6 +16,6 @@ void pushEntity(Entity *);
 
 void removeEntity(int );
 
-char *serializeEntities();
+json_value *serializeEntities();
 
 #endif //C_CLIENT_ENTITIES_H

@@ -30,5 +30,5 @@ int eventManager(ALLEGRO_EVENT_QUEUE *eventQueue);
 void redrawDisplay();
 void closeGameWindow(ALLEGRO_DISPLAY *gameWindowDisplay, ALLEGRO_EVENT_QUEUE *eventQueue);
 void clientUpdate();
-char *serializeGame(char *);
+char *serializeGame(json_value *);
 #endif //C_CLIENT_GAMEWINDOW_H

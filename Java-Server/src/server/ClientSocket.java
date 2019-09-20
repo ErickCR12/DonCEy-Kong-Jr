@@ -29,6 +29,7 @@ class ClientSocket extends Thread {
 
             message = in.readLine();
             System.out.printf("Server received: %s \n", message);
+            JsonParser.parseGame(message);
 
         } catch (IOException e) {
             e.printStackTrace();

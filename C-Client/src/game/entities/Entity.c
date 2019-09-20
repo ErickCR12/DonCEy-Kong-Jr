@@ -23,7 +23,7 @@ void updateRPoss(Entity *entity) {
     entity->ry = entity->y / GW_HEIGHT;
 }
 
-char *serialize(Entity *entity) {
+json_value *serialize(Entity *entity) {
     json_value *id = json_integer_new(entity->id);
     json_value *x = json_double_new(entity->rx);
     json_value *y = json_double_new(entity->ry);
@@ -35,10 +35,10 @@ char *serialize(Entity *entity) {
     json_object_push(obj, "y", y);
     json_object_push(obj, "type", type);
 
-    json_char *buf = malloc(json_measure(obj));
-    json_serialize(buf, obj);
+    //json_char *buf = malloc(json_measure(obj));
+    //json_serialize(buf, obj);
 
-    return buf;
+    return obj;
 }
 
 void parse(char *json, Entity *entity) {

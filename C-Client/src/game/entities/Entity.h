@@ -29,7 +29,7 @@ void kill();
 
 void updateRPoss(Entity *entity);
 
-char *serialize(Entity *);
+json_value *serialize(Entity *);
 
 void parse(char *, Entity *);
 

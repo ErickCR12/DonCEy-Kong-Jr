@@ -61,7 +61,7 @@ void createPlatforms(){
         platforms[i]->height = PLATFORM_HEIGHT;
         drawBitmap(platforms[i]->entity);
 
-        pushEntity(platforms[i]->entity);
+        //pushEntity(platforms[i]->entity);
 //        al_draw_scaled_bitmap(platforms[i]->entity->bitmap, x, y, PLATFORM_WIDTH, PLATFORM_HEIGHT,
 //                                                            x, y, platforms[i]->width, platforms[i]->height, 0);
         x += 170;
@@ -137,15 +137,14 @@ void closeGameWindow(ALLEGRO_DISPLAY *gameWindowDisplay, ALLEGRO_EVENT_QUEUE *ev
 }
 
 void clientUpdate() {
-    json_char *jsonEntities = serializeEntities();
+    json_value *jsonEntities = serializeEntities();
     message(serializeGame(jsonEntities));
 }
 
-char *serializeGame(char *json) {
+char *serializeGame(json_value *entities) {
     json_value *obj = json_object_new((size_t) length);
 
     json_value *game = json_integer_new(id);
-    json_value *entities = json_string_new(json);
 
     json_object_push(obj, "game", game);
     json_object_push(obj, "entities", entities);
