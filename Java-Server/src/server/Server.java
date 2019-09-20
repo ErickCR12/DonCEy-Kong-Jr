@@ -33,6 +33,7 @@ public class Server extends Thread {
 
     private void startListening() throws IOException {
         while (true) {
+            System.out.println("Waiting client...");
             new ClientSocket(serverSocket.accept())
                     .start();
         }

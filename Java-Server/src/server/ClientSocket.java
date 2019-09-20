@@ -6,8 +6,8 @@ import java.net.Socket;
 class ClientSocket extends Thread {
 
     private Socket socket;
-    private DataOutputStream out;
-    private DataInputStream in;
+    private BufferedReader in;
+    private PrintWriter out;
 
     ClientSocket(Socket socket) {
         this.socket = socket;
@@ -15,48 +15,50 @@ class ClientSocket extends Thread {
 
     public void start() {
         System.out.println("Client accepted");
-        startIOStream();
-        startListening();
+        String message = listen();
+        response(message);
+        stopListening();
     }
 
-    private void startIOStream() {
-        try {
-            out = new DataOutputStream(socket.getOutputStream());
-            in = new DataInputStream(
-                    new BufferedInputStream(socket.getInputStream()));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void startListening() {
+    private String listen() {
         String message = "";
         try {
-            while (!message.equals("exit")) {
-                message = in.readUTF();
-                System.out.printf("Server received: %s \n", message);
-                response(message);
-            }
-            stopListening();
+            in = new BufferedReader(
+                    new InputStreamReader(socket.getInputStream()));
+
+            message = in.readLine();
+            System.out.printf("Server received: %s \n", message);
 
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        return message;
     }
 
     private void response(String message) {
         try {
-            out.writeUTF(message);
+            out = new PrintWriter(socket.getOutputStream());
+
+            out.println(message + "\r");
+            out.flush();
             System.out.printf("Server send: %s \n", message);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private void stopListening() throws IOException {
+    private void stopListening() {
         System.out.println("Client closing...");
-        in.close();
-        out.close();
-        socket.close();
+
+        try {
+            in.close();
+            out.close();
+            socket.close();
+            stop();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

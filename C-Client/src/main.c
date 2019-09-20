@@ -8,7 +8,7 @@
 
 int main(){
     // Client
-    //start();
+    start();
 
     // Game
     createGameWindow();
