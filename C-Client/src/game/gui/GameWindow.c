@@ -16,7 +16,7 @@ void createGameWindow(){
     ALLEGRO_EVENT_QUEUE *eventQueue = setEventQueue(gameWindowDisplay, timer);
 
     createJunior();
-    createPlatform(100, 100);
+    createPlatforms();
 
     gameLoop(eventQueue);
 
@@ -42,15 +42,25 @@ void createJunior(){
     drawBitmap(junior->entity);
 }
 
-void createPlatform(float x, float y){
-    platform = (Platform*) malloc(sizeof(Platform));
-    platform->entity = (Entity*) malloc(sizeof(Entity));
-    platform->entity->x = x;
-    platform->entity->y = y;
-    platform->entity->bitmap = setBitmap("../sprites/platform.png");
-    platform->width = 100;
-    platform->height = 20;
-    drawBitmap(platform->entity);
+void createPlatforms(){
+    float x = 100;
+    float y = 100;
+    //float width[] = {100, 50, 30, 200, 150};
+    platforms = (Platform**) malloc(sizeof(Platform*));
+    for(int i = 0; i < AMOUNT_OF_PLATFORMS; i++) {
+        platforms[i] = (Platform*) malloc(sizeof(Platform));
+        platforms[i]->entity = (Entity *) malloc(sizeof(Entity));
+        platforms[i]->entity->x = x;
+        platforms[i]->entity->y = y;
+        platforms[i]->entity->bitmap = setBitmap("../sprites/platform.png");
+        platforms[i]->width = PLATFORM_WIDTH;
+        platforms[i]->height = PLATFORM_HEIGHT;
+        drawBitmap(platforms[i]->entity);
+//        al_draw_scaled_bitmap(platforms[i]->entity->bitmap, x, y, PLATFORM_WIDTH, PLATFORM_HEIGHT,
+//                                                            x, y, platforms[i]->width, platforms[i]->height, 0);
+        x += 150;
+        y += 100;
+    }
 }
 
 ALLEGRO_BITMAP* setBitmap(char* imgPath){
@@ -71,7 +81,7 @@ void gameLoop(ALLEGRO_EVENT_QUEUE *eventQueue){
 
         moveJrRight(junior, keyState);
         moveJrLeft(junior, keyState);
-        moveJrDown(junior, platform);
+        moveJrDown(junior, platforms);
     }
 }
 
@@ -90,7 +100,12 @@ int eventManager(ALLEGRO_EVENT_QUEUE *eventQueue){
 
 void redrawDisplay(){
     al_clear_to_color(al_map_rgb(0, 0, 0));
-    drawBitmap(platform->entity);
+    for(int i = 0; i < AMOUNT_OF_PLATFORMS; i++) {
+        drawBitmap(platforms[i]->entity);
+//        al_draw_scaled_bitmap(platforms[i]->entity->bitmap, platforms[i]->entity->x, platforms[i]->entity->y,
+//                PLATFORM_WIDTH, PLATFORM_HEIGHT, platforms[i]->entity->x, platforms[i]->entity->y, platforms[i]->width,
+//                platforms[i]->height, 0);
+    }
     drawBitmap(junior->entity);
     al_flip_display();
 }
@@ -100,4 +115,7 @@ void closeGameWindow(ALLEGRO_DISPLAY *gameWindowDisplay, ALLEGRO_EVENT_QUEUE *ev
     al_destroy_bitmap(junior->entity->bitmap);
     al_destroy_event_queue(eventQueue);
     free(junior);
+    for(int i = 0; i < AMOUNT_OF_PLATFORMS; i++)
+        free(platforms[i]);
+    free(platforms);
 }

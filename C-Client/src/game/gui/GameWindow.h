@@ -13,12 +13,12 @@
 
 
 Junior *junior;
-Platform *platform;
+Platform **platforms;
 
 void createGameWindow();
 ALLEGRO_EVENT_QUEUE* setEventQueue(ALLEGRO_DISPLAY *gameWindowDisplay, ALLEGRO_TIMER *timer);
 void createJunior();
-void createPlatform(float x, float y);
+void createPlatforms();
 ALLEGRO_BITMAP* setBitmap(char* imgPath);
 void gameLoop(ALLEGRO_EVENT_QUEUE *eventQueue);
 int eventManager(ALLEGRO_EVENT_QUEUE *eventQueue);

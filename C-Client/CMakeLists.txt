@@ -20,7 +20,7 @@ add_executable(C-Client
         src/game/entities/Junior.c
 
         src/game/gui/GameWindow.h
-        src/game/gui/GameWindow.c)
+        src/game/gui/GameWindow.c src/game/gui/CollisionHandler.c src/game/gui/CollisionHandler.h)
 
 
 # build

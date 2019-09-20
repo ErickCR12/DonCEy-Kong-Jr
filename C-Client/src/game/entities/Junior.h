@@ -16,7 +16,6 @@ struct Junior {
 
 void moveJrRight(Junior *junior, ALLEGRO_KEYBOARD_STATE keyState);
 void moveJrLeft(Junior *junior, ALLEGRO_KEYBOARD_STATE keyState);
-void moveJrDown(Junior *junior, Platform *platform);
-int isCollidingWithPlatform(Junior *junior, Platform *platform);
+void moveJrDown(Junior *junior, Platform **platforms);
 
 #endif //C_CLIENT_JUNIOR_H
