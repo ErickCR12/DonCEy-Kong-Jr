@@ -9,6 +9,7 @@ public class ClientTab extends Tab {
 
     private String name;
     private Pane pane;
+    private GameView gameView;
 
     public ClientTab(String name) {
         this.name = name;
@@ -33,8 +34,8 @@ public class ClientTab extends Tab {
     }
 
     private void loadGameView() {
-        GameView gameView = new GameView(660, 460);
-        gameView.relocate(310, 400);
+        gameView = new GameView(660, 460);
+        gameView.relocate(310, 100);
         gameView.load();
 
         pane.getChildren().add(gameView);
@@ -56,5 +57,9 @@ public class ClientTab extends Tab {
 
     private void autoButtonPressed(Boolean selected) {
         System.out.println(selected);
+    }
+
+    public GameView getGameView() {
+        return gameView;
     }
 }

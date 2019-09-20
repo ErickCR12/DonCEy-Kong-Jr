@@ -16,6 +16,8 @@ public class ClientTabManager {
         for (int i = 0; i < games.size(); i++){
             if (games.get(i).getId().equals(game.getId())) {
                 games.set(i, game);
+                clientsMenu.setGame(game);
+                clientsMenu.updateGameView();
                 return;
             }
         }
@@ -27,6 +29,7 @@ public class ClientTabManager {
         Platform.runLater(() -> {
             clientsMenu.createClientTab(String.valueOf(game.getId()));
             clientsMenu.setGame(game);
+            clientsMenu.updateGameView();
         });
 
     }
