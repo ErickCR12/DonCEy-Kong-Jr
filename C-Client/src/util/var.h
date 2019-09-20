@@ -17,8 +17,8 @@
 #define ROPE_WIDTH 35
 #define ROPE_HEIGHT 100
 
-#define JR_X_INITIAL 25
-#define JR_Y_INITIAL 400
+#define JR_X_INITIAL 90
+#define JR_Y_INITIAL 210
 
 #define FPS 60
 #define MOV_SPEED 0.00040f
@@ -41,9 +41,9 @@ static float PLATFORM2_Y_POS[] = {120, 120, 120, 120, 120, 120, 120, 120,
                                  145, 145, 145, 145, 145,
                                  290, 290, 400};
 
-#define AMOUNT_OF_ROPES 1
+#define AMOUNT_OF_ROPES 2
 
-static float ROPE_X_POSITION[] = {21};
-static float ROPE_Y_POSITION[] = {145};
+static float ROPE_X_POSITION[] = {21, 21};
+static float ROPE_Y_POSITION[] = {145, 245};
 
 #endif //C_CLIENT_VAR_H

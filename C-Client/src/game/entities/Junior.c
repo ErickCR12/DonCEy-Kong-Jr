@@ -23,7 +23,10 @@ int moveJrDown(Junior *junior, Platform **platforms){
     }return FALSE;
 }
 
-int moveJrUp(Junior *junior, ALLEGRO_KEYBOARD_STATE keyState, float *jumpCount, int jumping, Platform **platforms){
+int moveJrUp(Junior *junior, ALLEGRO_KEYBOARD_STATE keyState, float *jumpCount, int jumping,
+             Platform **platforms, Rope **ropes){
+    if(isCollidingWithRope(junior, ropes))
+        printf("AAAA\n");
     if(!jumping) {
         if (al_key_down(&keyState, ALLEGRO_KEY_UP)) {
             junior->entity->y -= MOV_SPEED;
