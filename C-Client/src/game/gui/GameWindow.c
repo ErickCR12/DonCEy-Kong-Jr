@@ -37,7 +37,7 @@ void createJunior(){
     junior = (Junior*) malloc(sizeof(Junior));
     junior->entity = (Entity*) malloc(sizeof(Entity));
     junior->entity->x = 120;
-    junior->entity->y = 20;
+    junior->entity->y = 50;
     junior->entity->bitmap = setBitmap("../sprites/jr.png");
     drawBitmap(junior->entity);
 }
@@ -58,8 +58,8 @@ void createPlatforms(){
         drawBitmap(platforms[i]->entity);
 //        al_draw_scaled_bitmap(platforms[i]->entity->bitmap, x, y, PLATFORM_WIDTH, PLATFORM_HEIGHT,
 //                                                            x, y, platforms[i]->width, platforms[i]->height, 0);
-        x += 150;
-        y += 100;
+        x += 170;
+        y += 30;
     }
 }
 
@@ -72,16 +72,20 @@ ALLEGRO_BITMAP* setBitmap(char* imgPath){
 }
 
 void gameLoop(ALLEGRO_EVENT_QUEUE *eventQueue){
-    int running = TRUE;
+    int playing = TRUE;
+    float jumpCount = 0.0f;
+    int jumping = FALSE;
     ALLEGRO_KEYBOARD_STATE keyState;
-    while (running) {
-        running = eventManager(eventQueue);
+    while (playing) {
+        playing = eventManager(eventQueue);
 
         al_get_keyboard_state(&keyState);
 
         moveJrRight(junior, keyState);
         moveJrLeft(junior, keyState);
-        moveJrDown(junior, platforms);
+        if(!jumping) moveJrDown(junior, platforms);
+        jumping = moveJrUp(junior, keyState, &jumpCount, jumping, platforms);
+
     }
 }
 
@@ -117,5 +121,5 @@ void closeGameWindow(ALLEGRO_DISPLAY *gameWindowDisplay, ALLEGRO_EVENT_QUEUE *ev
     free(junior);
     for(int i = 0; i < AMOUNT_OF_PLATFORMS; i++)
         free(platforms[i]);
-    free(platforms);
+    //free(platforms);
 }
