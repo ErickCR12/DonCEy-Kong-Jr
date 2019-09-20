@@ -38,8 +38,11 @@ void createJunior(){
     junior->entity = (Entity*) malloc(sizeof(Entity));
     junior->entity->x = 120;
     junior->entity->y = 50;
+    junior->entity->type = "junior";
     junior->entity->bitmap = setBitmap("../sprites/jr.png");
     drawBitmap(junior->entity);
+
+    pushEntity(junior->entity);
 }
 
 void createPlatforms(){
@@ -52,10 +55,13 @@ void createPlatforms(){
         platforms[i]->entity = (Entity *) malloc(sizeof(Entity));
         platforms[i]->entity->x = x;
         platforms[i]->entity->y = y;
+        platforms[i]->entity->type = "platform";
         platforms[i]->entity->bitmap = setBitmap("../sprites/platform.png");
         platforms[i]->width = PLATFORM_WIDTH;
         platforms[i]->height = PLATFORM_HEIGHT;
         drawBitmap(platforms[i]->entity);
+
+        pushEntity(platforms[i]->entity);
 //        al_draw_scaled_bitmap(platforms[i]->entity->bitmap, x, y, PLATFORM_WIDTH, PLATFORM_HEIGHT,
 //                                                            x, y, platforms[i]->width, platforms[i]->height, 0);
         x += 170;
@@ -86,6 +92,7 @@ void gameLoop(ALLEGRO_EVENT_QUEUE *eventQueue){
         if(!jumping) moveJrDown(junior, platforms);
         jumping = moveJrUp(junior, keyState, &jumpCount, jumping, platforms);
 
+        clientUpdate();
     }
 }
 
@@ -122,4 +129,9 @@ void closeGameWindow(ALLEGRO_DISPLAY *gameWindowDisplay, ALLEGRO_EVENT_QUEUE *ev
     for(int i = 0; i < AMOUNT_OF_PLATFORMS; i++)
         free(platforms[i]);
     //free(platforms);
+}
+
+void clientUpdate() {
+    json_char *jsonEntities = serializeEntities();
+    message(jsonEntities);
 }

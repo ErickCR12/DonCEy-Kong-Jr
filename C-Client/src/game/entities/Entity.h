@@ -17,6 +17,7 @@ typedef struct {
     float y;
     float rx;
     float ry;
+    char *type;
     ALLEGRO_BITMAP *bitmap;
 } Entity;
 

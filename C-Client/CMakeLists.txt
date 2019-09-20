@@ -16,7 +16,10 @@ add_executable(C-Client
         src/lib/json-builder.h
         src/lib/json-builder.c
 
+        src/game/entities/Entity.h
         src/game/entities/Entity.c
+        src/game/entities/Entities.h
+        src/game/entities/Entities.c
         src/game/entities/Fruit.h
         src/game/entities/Croco.h
         src/game/entities/Platform.h

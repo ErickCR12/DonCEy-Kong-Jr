@@ -27,11 +27,13 @@ char *serialize(Entity *entity) {
     json_value *id = json_integer_new(entity->id);
     json_value *x = json_double_new(entity->rx);
     json_value *y = json_double_new(entity->ry);
+    json_value *type = json_string_new(entity->type);
 
     json_value *obj = json_object_new(3);
     json_object_push(obj, "id", id);
     json_object_push(obj, "x", x);
     json_object_push(obj, "y", y);
+    json_object_push(obj, "type", type);
 
     json_char *buf = malloc(json_measure(obj));
     json_serialize(buf, obj);
@@ -45,4 +47,5 @@ void parse(char *json, Entity *entity) {
     entity->id = (int) obj->u.object.values[0].value->u.integer;
     entity->rx = (float) obj->u.object.values[1].value->u.dbl;
     entity->ry = (float) obj->u.object.values[2].value->u.dbl;
+    entity->type = obj->u.object.values[3].value->u.string.ptr;
 }

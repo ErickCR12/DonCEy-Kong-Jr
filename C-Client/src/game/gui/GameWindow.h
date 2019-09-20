@@ -5,11 +5,15 @@
 #ifndef C_CLIENT_GAMEWINDOW_H
 #define C_CLIENT_GAMEWINDOW_H
 
+#include <stdlib.h>
+#include <stdio.h>
 #include <allegro5/allegro.h>
 #include <allegro5\allegro_image.h>
 #include "../../util/var.h"
+#include "../entities/Entities.h"
 #include "../entities/Junior.h"
 #include "../entities/Platform.h"
+#include "../../client/Client.h"
 
 
 Junior *junior;
@@ -24,5 +28,5 @@ void gameLoop(ALLEGRO_EVENT_QUEUE *eventQueue);
 int eventManager(ALLEGRO_EVENT_QUEUE *eventQueue);
 void redrawDisplay();
 void closeGameWindow(ALLEGRO_DISPLAY *gameWindowDisplay, ALLEGRO_EVENT_QUEUE *eventQueue);
-
+void clientUpdate();
 #endif //C_CLIENT_GAMEWINDOW_H
