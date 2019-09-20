@@ -18,6 +18,7 @@ void createGameWindow(){
 
     createJunior();
     createPlatforms();
+    createRopes();
 
     gameLoop(eventQueue);
 
@@ -70,11 +71,26 @@ void createPlatforms(){
         platforms[i]->width = PLATFORM_WIDTH;
         platforms[i]->height = PLATFORM_HEIGHT;
         drawBitmap(platforms[i]->entity);
-
-        //pushEntity(platforms[i]->entity);
-//        al_draw_scaled_bitmap(platforms[i]->entity->bitmap, x, y, PLATFORM_WIDTH, PLATFORM_HEIGHT,
-//                                                            x, y, platforms[i]->width, platforms[i]->height, 0);
     }
+}
+
+void createRopes(){
+    ropes = (Rope**) malloc(AMOUNT_OF_ROPES * sizeof(Rope*));
+    char* imgPath = "../sprites/rope.png";
+    for(int i = 0; i < AMOUNT_OF_ROPES; i++) {
+        printf("%f\n: ", ROPE_X_POSITION[i]);
+        ropes[i] = (Rope*) malloc(sizeof(Rope));
+        ropes[i]->entity = (Entity*) malloc(sizeof(Entity));
+        ropes[i]->entity->id = i+1;
+        ropes[i]->entity->x = ROPE_X_POSITION[i];
+        ropes[i]->entity->y = ROPE_Y_POSITION[i];
+        ropes[i]->entity->bitmap = setBitmap(imgPath);
+        ropes[i]->entity->type = "rope";
+        ropes[i]->width = ROPE_WIDTH;
+        ropes[i]->height = ROPE_HEIGHT;
+        drawBitmap(ropes[i]->entity);
+    }
+    free(imgPath);
 }
 
 ALLEGRO_BITMAP* setBitmap(char* imgPath){
@@ -123,12 +139,10 @@ int eventManager(ALLEGRO_EVENT_QUEUE *eventQueue){
 
 void redrawDisplay(){
     al_clear_to_color(al_map_rgb(0, 0, 0));
-    for(int i = 0; i < PLATFORMS_TOTAL; i++) {
+    for(int i = 0; i < PLATFORMS_TOTAL; i++)
         drawBitmap(platforms[i]->entity);
-//        al_draw_scaled_bitmap(platforms[i]->entity->bitmap, platforms[i]->entity->x, platforms[i]->entity->y,
-//                PLATFORM_WIDTH, PLATFORM_HEIGHT, platforms[i]->entity->x, platforms[i]->entity->y, platforms[i]->width,
-//                platforms[i]->height, 0);
-    }
+    for(int i = 0; i < AMOUNT_OF_ROPES; i++)
+        drawBitmap(ropes[i]->entity);
     drawBitmap(junior->entity);
     al_flip_display();
 }

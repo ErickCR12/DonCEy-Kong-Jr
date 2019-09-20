@@ -9,8 +9,9 @@
 #include "Entity.h"
 
 typedef struct {
-    Entity entity;
-} Rope
-;
+    Entity *entity;
+    float width;
+    float height;
+} Rope;
 
 #endif //C_CLIENT_ROPE_H

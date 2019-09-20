@@ -14,16 +14,19 @@
 #include "../entities/Junior.h"
 #include "../entities/Platform.h"
 #include "../../client/Client.h"
+#include "../entities/Rope.h"
 
 
 Junior *junior;
 Platform **platforms;
+Rope **ropes;
 int id;
 
 void createGameWindow();
 ALLEGRO_EVENT_QUEUE* setEventQueue(ALLEGRO_DISPLAY *gameWindowDisplay, ALLEGRO_TIMER *timer);
 void createJunior();
 void createPlatforms();
+void createRopes();
 ALLEGRO_BITMAP* setBitmap(char* imgPath);
 void gameLoop(ALLEGRO_EVENT_QUEUE *eventQueue);
 int eventManager(ALLEGRO_EVENT_QUEUE *eventQueue);
