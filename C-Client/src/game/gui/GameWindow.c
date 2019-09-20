@@ -45,6 +45,7 @@ void createJunior(){
 void createPlatforms(){
     float x = 100;
     float y = 100;
+    //float width[] = {100, 50, 30, 200, 150};
     platforms = (Platform**) malloc(sizeof(Platform*));
     for(int i = 0; i < AMOUNT_OF_PLATFORMS; i++) {
         platforms[i] = (Platform*) malloc(sizeof(Platform));
@@ -52,10 +53,12 @@ void createPlatforms(){
         platforms[i]->entity->x = x;
         platforms[i]->entity->y = y;
         platforms[i]->entity->bitmap = setBitmap("../sprites/platform.png");
-        platforms[i]->width = 100;
-        platforms[i]->height = 20;
+        platforms[i]->width = PLATFORM_WIDTH;
+        platforms[i]->height = PLATFORM_HEIGHT;
         drawBitmap(platforms[i]->entity);
-        x += 100;
+//        al_draw_scaled_bitmap(platforms[i]->entity->bitmap, x, y, PLATFORM_WIDTH, PLATFORM_HEIGHT,
+//                                                            x, y, platforms[i]->width, platforms[i]->height, 0);
+        x += 150;
         y += 100;
     }
 }
@@ -97,8 +100,12 @@ int eventManager(ALLEGRO_EVENT_QUEUE *eventQueue){
 
 void redrawDisplay(){
     al_clear_to_color(al_map_rgb(0, 0, 0));
-    for(int i = 0; i < AMOUNT_OF_PLATFORMS; i++)
+    for(int i = 0; i < AMOUNT_OF_PLATFORMS; i++) {
         drawBitmap(platforms[i]->entity);
+//        al_draw_scaled_bitmap(platforms[i]->entity->bitmap, platforms[i]->entity->x, platforms[i]->entity->y,
+//                PLATFORM_WIDTH, PLATFORM_HEIGHT, platforms[i]->entity->x, platforms[i]->entity->y, platforms[i]->width,
+//                platforms[i]->height, 0);
+    }
     drawBitmap(junior->entity);
     al_flip_display();
 }

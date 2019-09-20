@@ -15,7 +15,7 @@ void moveJrLeft(Junior *junior, ALLEGRO_KEYBOARD_STATE keyState){
         junior->entity->x -= MOV_SPEED;
 }
 
-void moveJrDown(Junior *junior, Platform **platform){
-    if (!isCollidingWithPlatform(junior, platform))
+void moveJrDown(Junior *junior, Platform **platforms){
+    if (!isCollidingWithPlatform(junior, platforms))
         junior->entity->y += MOV_SPEED;
 }
