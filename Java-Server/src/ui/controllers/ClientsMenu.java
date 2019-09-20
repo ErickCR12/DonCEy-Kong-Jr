@@ -1,6 +1,7 @@
 package ui.controllers;
 
 import com.jfoenix.controls.JFXTabPane;
+import game.Game;
 import javafx.fxml.FXML;
 import ui.widgets.ClientTab;
 
@@ -8,6 +9,8 @@ public class ClientsMenu {
 
     @FXML
     public JFXTabPane clientsTabPane;
+
+    private Game game;
 
     @FXML
     public void clientsLabelPressed() {
@@ -19,5 +22,9 @@ public class ClientsMenu {
         clientTab.load();
 
         clientsTabPane.getTabs().add(clientTab);
+    }
+
+    public void setGame(Game game) {
+        this.game = game;
     }
 }
