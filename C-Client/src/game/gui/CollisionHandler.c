@@ -7,7 +7,7 @@
 int isCollidingWithPlatform(Junior *junior, Platform **platform){
     float xJr = junior->entity->x;
     float yJr = junior->entity->y;
-    for(int i = 0; i < AMOUNT_OF_PLATFORMS; i++) {
+    for(int i = 0; i < PLATFORMS_TOTAL; i++) {
         float xPlatform = platform[i]->entity->x;
         float yPlatform = platform[i]->entity->y;
         if ((xJr - platform[i]->width) <= xPlatform && (xJr + JR_WIDTH) >= xPlatform &&
