@@ -2,6 +2,7 @@ package server;
 
 import java.io.*;
 import java.net.Socket;
+import java.util.TimerTask;
 
 class ClientSocket extends Thread {
 
@@ -40,7 +41,7 @@ class ClientSocket extends Thread {
         try {
             out = new PrintWriter(socket.getOutputStream());
 
-            out.println(message + "\r");
+            out.println(message);
             out.flush();
             System.out.printf("Server send: %s \n", message);
 
@@ -52,13 +53,21 @@ class ClientSocket extends Thread {
     private void stopListening() {
         System.out.println("Client closing...");
 
-        try {
-            in.close();
-            out.close();
-            socket.close();
-            stop();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        new java.util.Timer().schedule(
+                new java.util.TimerTask() {
+                    @Override
+                    public void run() {
+                        try {
+                            in.close();
+                            out.close();
+                            socket.close();
+                            stop();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                5000
+        );
     }
 }

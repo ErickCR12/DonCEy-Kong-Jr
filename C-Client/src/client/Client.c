@@ -41,6 +41,7 @@ int connectServer(SOCKET socket, struct sockaddr_in serverAddress) {
 char *message(char *message) {
     start();
     sendMessage(message);
+    sleep(1);
     message = readMessage();
     stop();
     return message;
@@ -49,13 +50,15 @@ char *message(char *message) {
 void sendMessage(char *message) {
     if (send(sock, message, strlen(message), 0) < 0)
         printf(CLIENT_SEND_FAILED);
-    printf("Client send: %s \n", message);
+    else printf("Client send: %s \n", message);
 }
 
 char *readMessage() {
-    char *message[MAX];
-    if (recv(sock, *message, MAX, 0) == SOCKET_ERROR)
+    char response[MAX];
+    if (recv(sock, response, MAX, 0) == SOCKET_ERROR)
         printf(CLIENT_READ_FAILED);
-    printf("Client read: %s \n", *message);
-    return *message;
+    else printf("Client read: %s \n", response);
+
+    char *result = {response};
+    return result;
 }

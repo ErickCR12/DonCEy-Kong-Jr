@@ -7,7 +7,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <winsock.h>
+#include <winsock2.h>
 #include <unistd.h>
 #include <string.h>
 #include "../res/strings_values.h"
