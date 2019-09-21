@@ -19,6 +19,11 @@ void createGameWindow(){
     createJunior();
     createPlatforms();
     createRopes();
+    donkey = (Entity*) malloc(sizeof(Entity));
+    donkey->x = DK_X_POS;
+    donkey->y = DK_Y_POS;
+    donkey->bitmap = setBitmap("../sprites/dk.png");
+    drawBitmap(donkey);
 
     gameLoop(eventQueue);
 
@@ -78,7 +83,6 @@ void createRopes(){
     ropes = (Rope**) malloc(AMOUNT_OF_ROPES * sizeof(Rope*));
     char* imgPath = "../sprites/rope.png";
     for(int i = 0; i < AMOUNT_OF_ROPES; i++) {
-        printf("%f\n: ", ROPE_X_POSITION[i]);
         ropes[i] = (Rope*) malloc(sizeof(Rope));
         ropes[i]->entity = (Entity*) malloc(sizeof(Entity));
         ropes[i]->entity->id = i+1;
@@ -144,6 +148,7 @@ void redrawDisplay(){
     for(int i = 0; i < AMOUNT_OF_ROPES; i++)
         drawBitmap(ropes[i]->entity);
     drawBitmap(junior->entity);
+    drawBitmap(donkey);
     al_flip_display();
 }
 void closeGameWindow(ALLEGRO_DISPLAY *gameWindowDisplay, ALLEGRO_EVENT_QUEUE *eventQueue){

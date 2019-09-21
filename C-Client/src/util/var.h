@@ -15,15 +15,18 @@
 #define JR_WIDTH 65.0f
 #define JR_HEIGHT 57.0f
 #define ROPE_WIDTH 35
-#define ROPE_HEIGHT 100
+#define ROPE_HEIGHT 50
 
 #define JR_X_INITIAL 90
 #define JR_Y_INITIAL 210
 
+#define DK_X_POS 40
+#define DK_Y_POS 0
+
 #define FPS 60
 #define MOV_SPEED 0.00040f
 #define CLIMBING_SPEED 0.00020f
-#define JUMP_HEIGHT 60
+#define JUMP_HEIGHT 70
 
 #define AMOUNT_PLATFORMS1 11
 #define AMOUNT_PLATFORMS2 16
@@ -36,7 +39,7 @@ static float PLATFORM1_Y_POS[] = {500, 500, 460, 550, 510, 510, 470, 420, 380, 3
 
 static float PLATFORM2_X_POS[] = {0, 50, 100, 150, 200, 250, 300, 350,
                                  400, 450, 500, 550, 600,
-                                 70, 120, 385};
+                                 120, 170, 385};
 
 static float PLATFORM2_Y_POS[] = {120, 120, 120, 120, 120, 120, 120, 120,
                                  145, 145, 145, 145, 145,
@@ -44,7 +47,7 @@ static float PLATFORM2_Y_POS[] = {120, 120, 120, 120, 120, 120, 120, 120,
 
 #define AMOUNT_OF_ROPES 2
 
-static float ROPE_X_POSITION[] = {21, 21};
-static float ROPE_Y_POSITION[] = {145, 245};
+static float ROPE_X_POSITION[] = {40, 40};
+static float ROPE_Y_POSITION[] = {145, 195};
 
 #endif //C_CLIENT_VAR_H

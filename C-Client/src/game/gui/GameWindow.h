@@ -18,6 +18,7 @@
 
 
 Junior *junior;
+Entity *donkey;
 Platform **platforms;
 Rope **ropes;
 int id;

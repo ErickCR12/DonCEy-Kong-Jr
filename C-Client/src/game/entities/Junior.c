@@ -6,12 +6,14 @@
 #include <stdio.h>
 
 void moveJrRight(Junior *junior, ALLEGRO_KEYBOARD_STATE keyState){
+    if((junior->entity->x + JR_WIDTH) >= GW_WIDTH) return;
     if (al_key_down(&keyState, ALLEGRO_KEY_RIGHT ))
 
         junior->entity->x += MOV_SPEED;
 }
 
 void moveJrLeft(Junior *junior, ALLEGRO_KEYBOARD_STATE keyState){
+    if(junior->entity->x <= 0) return;
     if (al_key_down(&keyState, ALLEGRO_KEY_LEFT ))
         junior->entity->x -= MOV_SPEED;
 }
