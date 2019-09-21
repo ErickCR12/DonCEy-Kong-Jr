@@ -16,8 +16,11 @@ void moveJrLeft(Junior *junior, ALLEGRO_KEYBOARD_STATE keyState){
         junior->entity->x -= MOV_SPEED;
 }
 
-int moveJrDown(Junior *junior, Platform **platforms){
-    if (!isCollidingWithPlatform(junior, platforms)) {
+int moveJrDown(Junior *junior, ALLEGRO_KEYBOARD_STATE keyState, Platform **platforms, Rope **ropes){
+    if(isCollidingWithRope(junior, ropes)) {
+        if (al_key_down(&keyState, ALLEGRO_KEY_DOWN))
+            junior->entity->y += CLIMBING_SPEED;
+    }else if (!isCollidingWithPlatform(junior, platforms)){
         junior->entity->y += MOV_SPEED;
         return TRUE;
     }return FALSE;
@@ -25,25 +28,33 @@ int moveJrDown(Junior *junior, Platform **platforms){
 
 int moveJrUp(Junior *junior, ALLEGRO_KEYBOARD_STATE keyState, float *jumpCount, int jumping,
              Platform **platforms, Rope **ropes){
-    if(isCollidingWithRope(junior, ropes))
-        printf("AAAA\n");
-    if(!jumping) {
-        if (al_key_down(&keyState, ALLEGRO_KEY_UP)) {
-            junior->entity->y -= MOV_SPEED;
-            *jumpCount += MOV_SPEED;
-            return TRUE;
-        }
-    }else{
-        int falling = TRUE;
-        if(*jumpCount < JUMP_HEIGHT) {
-            junior->entity->y -= MOV_SPEED;
-            *jumpCount += MOV_SPEED;
-        }else
-            falling = moveJrDown(junior, platforms);
-
-        if(!falling){
-            *jumpCount = 0;
-            return FALSE;
-        }
+    if (al_key_down(&keyState, ALLEGRO_KEY_UP)) {
+        if (isCollidingWithRope(junior, ropes))
+            junior->entity->y -= CLIMBING_SPEED;
+        else if (!jumping)
+            return jrJump(junior, jumpCount);
+        else
+            return jrGravity(junior, keyState, jumpCount, platforms, ropes);
     }
 }
+
+int jrJump(Junior *junior, float *jumpCount){
+    junior->entity->y -= MOV_SPEED;
+    *jumpCount += MOV_SPEED;
+    return TRUE;
+}
+
+int jrGravity(Junior *junior, ALLEGRO_KEYBOARD_STATE keyState, float *jumpCount, Platform **platforms, Rope **ropes){
+    int falling = TRUE;
+    if (*jumpCount < JUMP_HEIGHT) {
+        junior->entity->y -= MOV_SPEED;
+        *jumpCount += MOV_SPEED;
+    } else
+        falling = moveJrDown(junior, keyState, platforms, ropes);
+    if (!falling) {
+        *jumpCount = 0;
+        return FALSE;
+    }
+}
+
+

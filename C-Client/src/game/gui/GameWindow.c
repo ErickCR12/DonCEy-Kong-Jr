@@ -112,7 +112,7 @@ void gameLoop(ALLEGRO_EVENT_QUEUE *eventQueue){
 
         moveJrRight(junior, keyState);
         moveJrLeft(junior, keyState);
-        if(!jumping) falling = moveJrDown(junior, platforms);
+        if(!jumping) falling = moveJrDown(junior, keyState, platforms, ropes);
         if(!falling) jumping = moveJrUp(junior, keyState, &jumpCount, jumping, platforms, ropes);
         timer++;
         if(junior->entity->y > GW_HEIGHT)

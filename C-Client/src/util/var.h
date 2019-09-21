@@ -22,6 +22,7 @@
 
 #define FPS 60
 #define MOV_SPEED 0.00040f
+#define CLIMBING_SPEED 0.00020f
 #define JUMP_HEIGHT 60
 
 #define AMOUNT_PLATFORMS1 11

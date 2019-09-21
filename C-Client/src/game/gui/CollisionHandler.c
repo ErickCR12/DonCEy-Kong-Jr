@@ -22,7 +22,7 @@ int isCollidingWithRope(Junior *junior, Rope **ropes){
     for(int i = 0; i < AMOUNT_OF_ROPES; i++) {
         float xRope = ropes[i]->entity->x;
         float yRope = ropes[i]->entity->y;
-        if ((xJr + JR_WIDTH) >= (xRope - 5) && xJr <= (xRope + ROPE_WIDTH + 5) &&
+        if ((xJr + JR_WIDTH) >= (xRope) && xJr <= (xRope + ROPE_WIDTH) &&
             (yJr > yRope) && yJr < (yRope + ROPE_HEIGHT))
             return TRUE;
     }return FALSE;
