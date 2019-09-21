@@ -31,13 +31,16 @@ int moveJrDown(Junior *junior, ALLEGRO_KEYBOARD_STATE keyState, Platform **platf
 int moveJrUp(Junior *junior, ALLEGRO_KEYBOARD_STATE keyState, float *jumpCount, int jumping,
              Platform **platforms, Rope **ropes){
     if (al_key_down(&keyState, ALLEGRO_KEY_UP)) {
-        if (isCollidingWithRope(junior, ropes))
+        if (isCollidingWithRope(junior, ropes)) {
             junior->entity->y -= CLIMBING_SPEED;
-        else if (!jumping)
+            *jumpCount = 0;
+        }else if (!jumping)
             return jrJump(junior, jumpCount);
         else
             return jrGravity(junior, keyState, jumpCount, platforms, ropes);
     }
+    if(isCollidingWithPlatform(junior, platforms))
+        *jumpCount = 0;
 }
 
 int jrJump(Junior *junior, float *jumpCount){
