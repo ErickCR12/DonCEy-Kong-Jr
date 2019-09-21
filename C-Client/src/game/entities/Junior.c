@@ -23,7 +23,7 @@ int moveJrDown(Junior *junior, ALLEGRO_KEYBOARD_STATE keyState, Platform **platf
         if (al_key_down(&keyState, ALLEGRO_KEY_DOWN))
             junior->entity->y += CLIMBING_DOWN_SPEED;
     }else if (!isCollidingWithPlatform(junior, platforms)){
-        junior->entity->y += MOV_SPEED;
+        junior->entity->y += GRAV_SPEED;
         return TRUE;
     }return FALSE;
 }
