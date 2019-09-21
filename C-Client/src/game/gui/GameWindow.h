@@ -9,12 +9,15 @@
 #include <stdio.h>
 #include <allegro5/allegro.h>
 #include <allegro5\allegro_image.h>
+#include <allegro5/allegro_audio.h>
+#include <allegro5/allegro_acodec.h>
 #include "../../util/var.h"
 #include "../entities/Entities.h"
 #include "../entities/Junior.h"
 #include "../entities/Platform.h"
 #include "../../client/Client.h"
 #include "../entities/Rope.h"
+
 
 
 Junior *junior;

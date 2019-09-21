@@ -7,6 +7,7 @@
 void createGameWindow(){
     ALLEGRO_DISPLAY *gameWindowDisplay;
     al_init();
+
     gameWindowDisplay = al_create_display(GW_WIDTH, GW_HEIGHT);
     al_init_image_addon();
 
