@@ -25,11 +25,12 @@
 
 #define FPS 60
 #define MOV_SPEED 0.00040f
-#define CLIMBING_SPEED 0.00020f
+#define CLIMBING_DOWN_SPEED 0.00060f
+#define CLIMBING_UP_SPEED 0.00020f
 #define JUMP_HEIGHT 70
 
 #define AMOUNT_PLATFORMS1 11
-#define AMOUNT_PLATFORMS2 16
+#define AMOUNT_PLATFORMS2 19
 
 static int PLATFORMS_TOTAL = AMOUNT_PLATFORMS1 + AMOUNT_PLATFORMS2;
 
@@ -37,17 +38,22 @@ static float PLATFORM1_X_POS[] = {15, 65, 200, 330, 460, 510, 660, 800, 940, 107
 
 static float PLATFORM1_Y_POS[] = {500, 500, 460, 550, 510, 510, 470, 420, 380, 320, 320};
 
-static float PLATFORM2_X_POS[] = {0, 50, 100, 150, 200, 250, 300, 350,
-                                 400, 450, 500, 550, 600,
+static float PLATFORM2_X_POS[] = {0, 50, 100, 150, 200, 250, 300, 350, 400, 450, 500,
+                                 525, 575, 625, 675, 725,
                                  120, 170, 385};
 
-static float PLATFORM2_Y_POS[] = {120, 120, 120, 120, 120, 120, 120, 120,
-                                 145, 145, 145, 145, 145,
+static float PLATFORM2_Y_POS[] = {120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120,
+                                 144, 144, 144, 144, 144,
                                  290, 290, 400};
 
-#define AMOUNT_OF_ROPES 2
+#define AMOUNT_OF_ROPES 11
 
-static float ROPE_X_POSITION[] = {40, 40};
-static float ROPE_Y_POSITION[] = {145, 195};
+static float ROPE_X_POSITION[] = {40, 40, 40, 40, 40,
+                                  150,
+                                  275, 275, 275, 275, 275};
+
+static float ROPE_Y_POSITION[] = {145, 195, 245, 295, 345,
+                                  145,
+                                  145, 195, 245, 295, 345};
 
 #endif //C_CLIENT_VAR_H
