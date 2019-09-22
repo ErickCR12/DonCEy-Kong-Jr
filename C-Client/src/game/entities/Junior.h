@@ -13,6 +13,17 @@ typedef struct Junior Junior;
 
 struct Junior {
     Entity *entity;
+    ALLEGRO_BITMAP *notMoving[2];
+    ALLEGRO_BITMAP *movingLeft[3];
+    ALLEGRO_BITMAP *movingRight[3];
+    ALLEGRO_BITMAP *jumpingLeft[1];
+    ALLEGRO_BITMAP *jumpingRight[1];
+    ALLEGRO_BITMAP *ropeRight[2];
+    ALLEGRO_BITMAP *ropeLeft[2];
+    int xState; // [-1, 0, 1] => [left, static, right]
+    int yState; // [-1, 0, 1, 2] => [falling, platform, jumping, rope]
+    int animationIndex;
+    int animationTimer;
 };
 
 void moveJrRight(Junior *junior, ALLEGRO_KEYBOARD_STATE keyState);
@@ -23,4 +34,8 @@ int moveJrUp(Junior *junior, ALLEGRO_KEYBOARD_STATE keyState, float *jumpCount, 
 int jrJump(Junior *junior, float *jumpCount);
 int jrGravity(Junior *junior, ALLEGRO_KEYBOARD_STATE keyState, float *jumpCount, Platform **platforms, Rope **ropes);
 
+void animate(Junior *);
+void setAnimation(Junior *, ALLEGRO_BITMAP **);
+
+void loadBitMaps(Junior *);
 #endif //C_CLIENT_JUNIOR_H

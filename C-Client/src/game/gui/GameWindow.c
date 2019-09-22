@@ -42,6 +42,7 @@ void createJunior(){
     junior->entity = initializeEntity(1, JR_X_INITIAL, JR_Y_INITIAL, JR_X_INITIAL, JR_Y_INITIAL, "junior",
                                       setBitmap("../sprites/jr.png"));
     pushEntity(junior->entity);
+    loadBitMaps(junior);
 }
 
 void createPlatforms(){
@@ -93,7 +94,7 @@ void gameLoop(ALLEGRO_EVENT_QUEUE *eventQueue){
         moveJrLeft(junior, keyState);
         if(!jumping) falling = moveJrDown(junior, keyState, platforms, ropes);
         if(!falling) jumping = moveJrUp(junior, keyState, &jumpCount, jumping, platforms, ropes);
-
+        animate(junior);
         timer++;
 
         if(junior->entity->y > GW_HEIGHT)

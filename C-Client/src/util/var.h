@@ -19,6 +19,7 @@
 
 #define JR_X_INITIAL 15
 #define JR_Y_INITIAL 420
+#define JR_ANIM_TIME 100
 
 #define DK_X_POS 40
 #define DK_Y_POS 0
