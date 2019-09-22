@@ -20,11 +20,7 @@ void createGameWindow(){
     createJunior();
     createPlatforms();
     createRopes();
-    donkey = (Entity*) malloc(sizeof(Entity));
-    donkey->x = DK_X_POS;
-    donkey->y = DK_Y_POS;
-    donkey->bitmap = setBitmap("../sprites/dk.png");
-    drawBitmap(donkey);
+    donkey = initializeEntity(0, DK_X_POS, DK_Y_POS, DK_X_POS, DK_Y_POS, "donkey", setBitmap("../sprites/dk.png"));
 
     gameLoop(eventQueue);
 
@@ -43,24 +39,16 @@ ALLEGRO_EVENT_QUEUE* setEventQueue(ALLEGRO_DISPLAY *gameWindowDisplay, ALLEGRO_T
 
 void createJunior(){
     junior = (Junior*) malloc(sizeof(Junior));
-    junior->entity = (Entity*) malloc(sizeof(Entity));
-    junior->entity->x = JR_X_INITIAL;
-    junior->entity->y = JR_Y_INITIAL;
-    junior->entity->type = "junior";
-    junior->entity->bitmap = setBitmap("../sprites/jr.png");
-    drawBitmap(junior->entity);
-
+    junior->entity = initializeEntity(1, JR_X_INITIAL, JR_Y_INITIAL, JR_X_INITIAL, JR_Y_INITIAL, "junior",
+                                      setBitmap("../sprites/jr.png"));
     pushEntity(junior->entity);
 }
 
 void createPlatforms(){
     platforms = (Platform**) malloc(PLATFORMS_TOTAL * sizeof(Platform*));
-    char* imgPath;
+    char* imgPath = NULL;
     float x, y;
     for(int i = 0; i < PLATFORMS_TOTAL; i++) {
-        platforms[i] = (Platform*) malloc(sizeof(Platform));
-        platforms[i]->entity = (Entity *) malloc(sizeof(Entity));
-        platforms[i]->entity->id = i+1;
         if(i < AMOUNT_PLATFORMS1){
             x = PLATFORM1_X_POS[i];
             y = PLATFORM1_Y_POS[i];
@@ -70,31 +58,17 @@ void createPlatforms(){
             y = PLATFORM2_Y_POS[i - AMOUNT_PLATFORMS1];
             imgPath = "../sprites/platform2.png";
         }
-        platforms[i]->entity->x = x;
-        platforms[i]->entity->y = y;
-        platforms[i]->entity->bitmap = setBitmap(imgPath);
-        platforms[i]->entity->type = "platform";
-        platforms[i]->width = PLATFORM_WIDTH;
-        platforms[i]->height = PLATFORM_HEIGHT;
-        drawBitmap(platforms[i]->entity);
+        platforms[i] = initializePlatform(i+2, x, y, x, y, "platform", setBitmap(imgPath), PLATFORM_WIDTH,
+                                           PLATFORM_HEIGHT);
     }
 }
 
 void createRopes(){
     ropes = (Rope**) malloc(AMOUNT_OF_ROPES * sizeof(Rope*));
     char* imgPath = "../sprites/rope.png";
-    for(int i = 0; i < AMOUNT_OF_ROPES; i++) {
-        ropes[i] = (Rope*) malloc(sizeof(Rope));
-        ropes[i]->entity = (Entity*) malloc(sizeof(Entity));
-        ropes[i]->entity->id = i+1;
-        ropes[i]->entity->x = ROPE_X_POSITION[i];
-        ropes[i]->entity->y = ROPE_Y_POSITION[i];
-        ropes[i]->entity->bitmap = setBitmap(imgPath);
-        ropes[i]->entity->type = "rope";
-        ropes[i]->width = ROPE_WIDTH;
-        ropes[i]->height = ROPE_HEIGHT;
-        drawBitmap(ropes[i]->entity);
-    }
+    for(int i = 0; i < AMOUNT_OF_ROPES; i++)
+        ropes[i] = initializeRope(0, ROPE_X_POSITION[i], ROPE_Y_POSITION[i], ROPE_X_POSITION[i], ROPE_Y_POSITION[i],
+                                  "rope", setBitmap(imgPath), ROPE_WIDTH, ROPE_HEIGHT);
     free(imgPath);
 }
 
@@ -119,9 +93,12 @@ void gameLoop(ALLEGRO_EVENT_QUEUE *eventQueue){
         moveJrLeft(junior, keyState);
         if(!jumping) falling = moveJrDown(junior, keyState, platforms, ropes);
         if(!falling) jumping = moveJrUp(junior, keyState, &jumpCount, jumping, platforms, ropes);
+
         timer++;
+
         if(junior->entity->y > GW_HEIGHT)
             playing = false;
+
         if (timer > 30000) {
             clientUpdate();
             timer = 0;

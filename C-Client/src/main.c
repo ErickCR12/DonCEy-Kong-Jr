@@ -6,6 +6,7 @@
 #include <time.h>
 #include "game/gui/GameWindow.h"
 #include "client/Client.h"
+#include "datastructures/LinkedList.h"
 
 int main(){
     // Some Initializations
@@ -17,6 +18,11 @@ int main(){
 
     // Game
     createGameWindow();
+
+    LinkedList *list = initializeList();
+
+    Node *node = (Node*) malloc(sizeof(Node));
+
 
     return 0;
 }

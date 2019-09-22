@@ -30,7 +30,7 @@ add_executable(C-Client
         src/game/gui/GameWindow.h
         src/game/gui/GameWindow.c
         src/game/gui/CollisionHandler.c
-        src/game/gui/CollisionHandler.h)
+        src/game/gui/CollisionHandler.h src/datastructures/LinkedList.h src/datastructures/Node.h src/datastructures/LinkedList.c src/datastructures/Node.c src/game/entities/Platform.c src/game/entities/Rope.c)
 
 
 # build

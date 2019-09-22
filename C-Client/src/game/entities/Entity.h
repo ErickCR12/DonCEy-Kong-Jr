@@ -21,6 +21,8 @@ typedef struct {
     ALLEGRO_BITMAP *bitmap;
 } Entity;
 
+Entity* initializeEntity(int id, float x, float y, float rx, float ry, char *type, ALLEGRO_BITMAP *bitmap);
+
 void drawBitmap(Entity *entity);
 
 int collide(Entity);

@@ -6,6 +6,19 @@
 #include "Entity.h"
 #include "../../lib/json.h"
 
+Entity* initializeEntity(int id, float x, float y, float rx, float ry, char *type, ALLEGRO_BITMAP *bitmap){
+    Entity *entity = (Entity*) malloc(sizeof(Entity));
+    entity->id = id;
+    entity->x = x;
+    entity->y = y;
+    entity->rx = rx;
+    entity->ry = ry;
+    entity->type = type;
+    entity->bitmap = bitmap;
+    drawBitmap(entity);
+    return entity;
+}
+
 void drawBitmap(Entity *entity){
     al_draw_bitmap(entity->bitmap, entity->x, entity->y, 0);
 }

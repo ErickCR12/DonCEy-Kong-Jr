@@ -14,4 +14,7 @@ typedef struct {
     float height;
 } Rope;
 
+Rope* initializeRope(int id, float x, float y, float rx, float ry, char *type, ALLEGRO_BITMAP *bitmap,
+                             float width, float height);
+
 #endif //C_CLIENT_ROPE_H
