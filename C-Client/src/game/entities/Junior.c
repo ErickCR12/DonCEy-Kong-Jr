@@ -46,8 +46,16 @@ int moveJrUp(Junior *junior, ALLEGRO_KEYBOARD_STATE keyState, float *jumpCount, 
         else
             return jrGravity(junior, keyState, jumpCount, platforms, ropes);
     }
-    if(isCollidingWithPlatform(junior, platforms))
+    if(isCollidingWithPlatform(junior, platforms)) {
+        junior->yState = 0;
         *jumpCount = 0;
+    }
+}
+
+void notMov(Junior *junior, ALLEGRO_KEYBOARD_STATE keyState) {
+    if (!al_key_down(&keyState, ALLEGRO_KEY_LEFT)
+    && !al_key_down(&keyState, ALLEGRO_KEY_RIGHT))
+        junior->xState = 0;
 }
 
 int jrJump(Junior *junior, float *jumpCount){
@@ -61,6 +69,7 @@ int jrGravity(Junior *junior, ALLEGRO_KEYBOARD_STATE keyState, float *jumpCount,
     int falling = TRUE;
     if (*jumpCount < JUMP_HEIGHT) {
         junior->entity->y -= MOV_SPEED;
+        junior->yState = 1;
         *jumpCount += MOV_SPEED;
     } else
         falling = moveJrDown(junior, keyState, platforms, ropes);
@@ -71,32 +80,32 @@ int jrGravity(Junior *junior, ALLEGRO_KEYBOARD_STATE keyState, float *jumpCount,
 }
 
 void animate(Junior *junior) {
+    junior->animationTimer--;
     // OnRope
     if (junior->yState == 2) {
-        if (junior->xState == 1) setAnimation(junior, junior->ropeRight);
-        else if (junior->xState == -1) setAnimation(junior, junior->ropeLeft);
+        if (junior->xState == 1) setAnimation(junior, junior->ropeRight, 2);
+        else if (junior->xState == -1) setAnimation(junior, junior->ropeLeft, 2);
+        else if (junior->xState == 0) setAnimation(junior, junior->ropeRight, 2);
     }
     // Jumping or Falling
     else if (junior->yState == 1 || junior->yState == -1) {
-        if (junior->xState == 1) setAnimation(junior, junior->jumpingRight);
-        else if (junior->xState == -1) setAnimation(junior, junior->jumpingLeft);
+        if (junior->xState == 1 |
+            junior->xState == 0) setAnimation(junior, junior->jumpingRight, 1);
+        else if (junior->xState == -1) setAnimation(junior, junior->jumpingLeft, 1);
     }
     // Moving
     else if (junior->yState == 0) {
-        if (junior->xState == 1) setAnimation(junior, junior->movingRight);
-        else if (junior->xState == -1) setAnimation(junior, junior->movingLeft);
+        if (junior->xState == 1) setAnimation(junior, junior->movingRight, 3);
+        else if (junior->xState == -1) setAnimation(junior, junior->movingLeft, 3);
+        else if (junior->xState == 0) setAnimation(junior, junior->notMoving, 1);
     }
-    // Not Moving
-    else setAnimation(junior, junior->notMoving);
 }
 
-void setAnimation(Junior *junior, ALLEGRO_BITMAP **array) {
-    junior->animationTimer--;
+void setAnimation(Junior *junior, ALLEGRO_BITMAP **array, int length) {
     if (junior->animationTimer <= 0) {
-        int length = sizeof(*array) / sizeof(ALLEGRO_BITMAP *);
-        int i = junior->animationIndex %= length;
+        junior->animationIndex = (junior->animationIndex + 1) % length;
         junior->animationTimer = JR_ANIM_TIME;
-        junior->entity->bitmap = array[i];
+        junior->entity->bitmap = array[junior->animationIndex];
     }
 }
 
@@ -111,7 +120,6 @@ void loadBitMaps(Junior *junior) {
     junior->movingRight[2] = loadBitMap("../sprites/jr/mvr2.png");
 
     junior->notMoving[0] = loadBitMap("../sprites/jr/ide0.png");
-    junior->notMoving[1] = loadBitMap("../sprites/jr/ide1.png");
 
     junior->jumpingLeft[0] = loadBitMap("../sprites/jr/jl0.png");
 
@@ -122,4 +130,6 @@ void loadBitMaps(Junior *junior) {
 
     junior->ropeRight[0] = loadBitMap("../sprites/jr/rr0.png");
     junior->ropeRight[1] = loadBitMap("../sprites/jr/rr1.png");
+
+    junior->rope[0] = loadBitMap("../sprites/jr/rr0.png");
 }

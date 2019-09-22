@@ -27,3 +27,12 @@ void deleteNode(LinkedList *list, Node* node){
 
 }
 
+int size(LinkedList *list) {
+    Node *tmp = list->head;
+    int size = 0;
+    while (tmp != NULL) {
+        tmp = tmp->nextNode;
+        size++;
+    }
+    return size;
+}

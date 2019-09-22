@@ -19,7 +19,7 @@
 
 #define JR_X_INITIAL 15
 #define JR_Y_INITIAL 420
-#define JR_ANIM_TIME 100
+#define JR_ANIM_TIME 100000
 
 #define DK_X_POS 40
 #define DK_Y_POS 0
@@ -29,7 +29,7 @@
 #define GRAV_SPEED 0.00060f
 #define CLIMBING_DOWN_SPEED 0.00060f
 #define CLIMBING_UP_SPEED 0.00020f
-#define JUMP_HEIGHT 70
+#define JUMP_HEIGHT 90
 
 #define AMOUNT_PLATFORMS1 10
 #define AMOUNT_PLATFORMS2 28

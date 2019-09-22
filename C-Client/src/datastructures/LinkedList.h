@@ -15,5 +15,6 @@ typedef struct{
 LinkedList *initializeList();
 void insertNode(LinkedList *list, Node *node);
 void deleteNode(LinkedList *list, Node *node);
+int size(LinkedList *list);
 
 #endif //C_CLIENT_LINKEDLIST_H

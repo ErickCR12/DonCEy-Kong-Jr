@@ -90,6 +90,7 @@ void gameLoop(ALLEGRO_EVENT_QUEUE *eventQueue){
 
         al_get_keyboard_state(&keyState);
 
+        notMov(junior, keyState);
         moveJrRight(junior, keyState);
         moveJrLeft(junior, keyState);
         if(!jumping) falling = moveJrDown(junior, keyState, platforms, ropes);
