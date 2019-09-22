@@ -8,13 +8,17 @@
 #include "client/Client.h"
 #include "datastructures/LinkedList.h"
 
+void socksInit() {
+    WSADATA wsa;
+    WSAStartup(MAKEWORD(2,2),&wsa);
+    length = 0;
+    srand(time(NULL));
+    id = rand();
+}
+
 int main(){
     // Some Initializations
-//    WSADATA wsa;
-//    WSAStartup(MAKEWORD(2,2),&wsa);
-//    length = 0;
-//    srand(time(NULL));
-//    id = rand();
+    socksInit();
 
     // Game
     createGameWindow();
@@ -22,3 +26,4 @@ int main(){
 
     return 0;
 }
+

@@ -174,17 +174,21 @@ void closeGameWindow(ALLEGRO_DISPLAY *gameWindowDisplay){
 }
 
 void clientUpdate() {
-    json_value *jsonEntities = serializeEntities();
-    message(serializeGame(jsonEntities));
+    updateRPoss(junior->entity);
+    updateRPoss(donkey);
+    updateRPoss(key);
+
+    message(serializeGame());
 }
 
-char *serializeGame(json_value *entities) {
+char *serializeGame() {
     json_value *obj = json_object_new((size_t) length);
 
     json_value *game = json_integer_new(id);
+    json_value *jsonEntities = serializeEntities(junior, donkey, platforms, key, ropes);
 
     json_object_push(obj, "game", game);
-    json_object_push(obj, "entities", entities);
+    json_object_push(obj, "entities", jsonEntities);
 
     json_char *buf = malloc(json_measure(obj));
     json_serialize(buf, obj);

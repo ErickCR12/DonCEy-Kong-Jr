@@ -42,5 +42,5 @@ void redrawDisplay();
 void deleteWidgets();
 void closeGameWindow(ALLEGRO_DISPLAY *gameWindowDisplay);
 void clientUpdate();
-char *serializeGame(json_value *);
+char *serializeGame();
 #endif //C_CLIENT_GAMEWINDOW_H
