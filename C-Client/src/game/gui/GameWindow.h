@@ -17,14 +17,15 @@
 #include "../entities/Platform.h"
 #include "../../client/Client.h"
 #include "../entities/Rope.h"
-
+#include "../../datastructures/LinkedList.h"
 
 
 Junior *junior;
 Entity *donkey;
 Platform **platforms;
-Entity *key;
 Rope **ropes;
+LinkedList *crocos;
+Entity *key;
 int id;
 ALLEGRO_EVENT_QUEUE *eventQueue;
 
