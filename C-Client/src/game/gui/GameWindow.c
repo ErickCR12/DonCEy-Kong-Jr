@@ -8,27 +8,37 @@
 void createGameWindow(){
     ALLEGRO_DISPLAY *gameWindowDisplay;
     al_init();
-
     gameWindowDisplay = al_create_display(GW_WIDTH, GW_HEIGHT);
+
+    startGame(gameWindowDisplay);
+}
+
+void startGame(ALLEGRO_DISPLAY *gameWindowDisplay){
+    initializeWidgets(gameWindowDisplay);
+
+    int win = gameLoop(eventQueue);
+
+    deleteWidgets();
+    if(win)
+        startGame(gameWindowDisplay);
+    else
+        closeGameWindow(gameWindowDisplay);
+}
+
+void initializeWidgets(ALLEGRO_DISPLAY *gameWindowDisplay){
     al_init_image_addon();
 
     ALLEGRO_TIMER *timer = NULL;
     timer = al_create_timer(1.0 / FPS);
     al_start_timer(timer);
 
-    ALLEGRO_EVENT_QUEUE *eventQueue = setEventQueue(gameWindowDisplay, timer);
+    eventQueue = setEventQueue(gameWindowDisplay, timer);
 
     createJunior();
     createPlatforms();
     createRopes();
     donkey = initializeEntity(0, DK_X_POS, DK_Y_POS, DK_X_POS, DK_Y_POS, "donkey", setBitmap("../sprites/dk.png"));
     key = initializeEntity(0, KEY_X_POS, KEY_Y_POS, KEY_X_POS, KEY_Y_POS, "key", setBitmap("../sprites/key.png"));
-
-    int win = gameLoop(eventQueue);
-
-    closeGameWindow(gameWindowDisplay, eventQueue);
-    if(win)
-        createGameWindow();
 }
 
 ALLEGRO_EVENT_QUEUE* setEventQueue(ALLEGRO_DISPLAY *gameWindowDisplay, ALLEGRO_TIMER *timer){
@@ -83,7 +93,7 @@ ALLEGRO_BITMAP* setBitmap(char* imgPath){
     return bitmap;
 }
 
-int gameLoop(ALLEGRO_EVENT_QUEUE *eventQueue){
+int gameLoop(){
     int playing = TRUE, falling = FALSE, jumping = FALSE, win = FALSE;
     float jumpCount = 0.0f;
     int timer = 0;
@@ -114,7 +124,7 @@ int gameLoop(ALLEGRO_EVENT_QUEUE *eventQueue){
     }return win;
 }
 
-int eventManager(ALLEGRO_EVENT_QUEUE *eventQueue){
+int eventManager(){
     ALLEGRO_EVENT event;
     if (!al_is_event_queue_empty(eventQueue)) {
         al_wait_for_event(eventQueue, &event);
@@ -138,13 +148,11 @@ void redrawDisplay(){
     drawBitmap(key);
     al_flip_display();
 }
-void closeGameWindow(ALLEGRO_DISPLAY *gameWindowDisplay, ALLEGRO_EVENT_QUEUE *eventQueue){
-    al_destroy_display(gameWindowDisplay);
-    al_uninstall_keyboard();
+
+void deleteWidgets(){
     al_destroy_bitmap(junior->entity->bitmap);
     al_destroy_bitmap(donkey->bitmap);
     al_destroy_bitmap(key->bitmap);
-    al_destroy_event_queue(eventQueue);
     for(int i = 0; i < PLATFORMS_TOTAL; i++)
         free(platforms[i]);
     for(int i = 0; i < AMOUNT_OF_ROPES; i++)
@@ -154,6 +162,12 @@ void closeGameWindow(ALLEGRO_DISPLAY *gameWindowDisplay, ALLEGRO_EVENT_QUEUE *ev
     free(key);
     free(platforms);
     free(ropes);
+}
+
+void closeGameWindow(ALLEGRO_DISPLAY *gameWindowDisplay){
+    al_destroy_display(gameWindowDisplay);
+    al_uninstall_keyboard();
+    al_destroy_event_queue(eventQueue);
 }
 
 void clientUpdate() {
