@@ -31,6 +31,8 @@ void kill();
 
 void updateRPoss(Entity *entity);
 
+ALLEGRO_BITMAP *loadBitMap(char *);
+
 json_value *serialize(Entity *);
 
 void parse(char *, Entity *);

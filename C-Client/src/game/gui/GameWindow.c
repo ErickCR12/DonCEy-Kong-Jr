@@ -55,6 +55,7 @@ void createJunior(){
     junior->entity = initializeEntity(1, JR_X_INITIAL, JR_Y_INITIAL, JR_X_INITIAL, JR_Y_INITIAL, "junior",
                                       setBitmap("../sprites/jr.png"));
     pushEntity(junior->entity);
+    loadBitMaps(junior);
 }
 
 void createPlatforms(){
@@ -102,10 +103,12 @@ int gameLoop(){
 
         al_get_keyboard_state(&keyState);
 
+        notMov(junior, keyState);
         moveJrRight(junior, keyState);
         moveJrLeft(junior, keyState);
         if(!jumping) falling = moveJrDown(junior, keyState, platforms, ropes);
         if(!falling) jumping = moveJrUp(junior, keyState, &jumpCount, jumping, platforms, ropes);
+        animate(junior);
         timer++;
 
         if(isCollindingWithKey(junior, key)){

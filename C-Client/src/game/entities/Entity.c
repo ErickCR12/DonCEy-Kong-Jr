@@ -36,6 +36,13 @@ void updateRPoss(Entity *entity) {
     entity->ry = entity->y / GW_HEIGHT;
 }
 
+ALLEGRO_BITMAP* loadBitMap(char* imgPath) {
+    ALLEGRO_BITMAP *bitmap = NULL;
+    bitmap = al_load_bitmap(imgPath);
+    assert(bitmap != NULL);
+    return bitmap;
+}
+
 json_value *serialize(Entity *entity) {
     json_value *id = json_integer_new(entity->id);
     json_value *x = json_double_new(entity->rx);
