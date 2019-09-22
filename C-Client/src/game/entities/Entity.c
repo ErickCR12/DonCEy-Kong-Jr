@@ -15,7 +15,7 @@ Entity* initializeEntity(int id, float x, float y, float rx, float ry, char *typ
     entity->ry = ry;
     entity->type = type;
     entity->bitmap = bitmap;
-    drawBitmap(entity);
+    //drawBitmap(entity);
     return entity;
 }
 

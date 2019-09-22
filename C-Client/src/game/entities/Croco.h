@@ -9,7 +9,7 @@
 #include "Entity.h"
 
 typedef struct {
-    Entity entity;
+    Entity *entity;
 } Croco
 ;
 

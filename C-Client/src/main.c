@@ -19,10 +19,6 @@ int main(){
     // Game
     createGameWindow();
 
-    LinkedList *list = initializeList();
-
-    Node *node = (Node*) malloc(sizeof(Node));
-
 
     return 0;
 }

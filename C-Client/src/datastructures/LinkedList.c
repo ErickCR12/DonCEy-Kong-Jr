@@ -20,7 +20,7 @@ void insertNode(LinkedList *list, Node* node){
         while(lastNode->nextNode != NULL)
             lastNode = lastNode->nextNode;
         lastNode->nextNode = node;
-    }
+    }list->amountOfCrocos++;
 }
 
 void deleteNode(LinkedList *list, Node* node){
