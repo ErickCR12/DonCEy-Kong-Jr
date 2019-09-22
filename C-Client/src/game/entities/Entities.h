@@ -11,7 +11,6 @@
 #define MAX_ENTITIES 30
 
 Entity *entities[MAX_ENTITIES];
-int length;
 
 void pushEntity(Entity *);
 

@@ -10,9 +10,12 @@
 
 void socksInit() {
     WSADATA wsa;
-    WSAStartup(MAKEWORD(2,2),&wsa);
-    length = 0;
-    srand(time(NULL));
+    if (WSAStartup(MAKEWORD(2,2),&wsa) != 0)
+    {
+        printf("Failed. Error Code : %d",WSAGetLastError());
+        _exit(1);
+    }
+    srand((unsigned int) time(NULL));
     id = rand();
 }
 
@@ -22,7 +25,6 @@ int main(){
 
     // Game
     createGameWindow();
-
 
     return 0;
 }

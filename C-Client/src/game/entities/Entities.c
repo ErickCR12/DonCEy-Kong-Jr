@@ -3,16 +3,6 @@
 //
 #include "Entities.h"
 
-void pushEntity(Entity *entity) {
-    entity->id = length;
-    entities[length] = entity;
-    length += 1;
-}
-
-void removeEntity(int id) {
-
-}
-
 json_value *serializeEntities(Junior *junior,
         Entity *donkey,
         Platform **platforms,

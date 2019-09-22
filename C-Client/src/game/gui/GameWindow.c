@@ -54,7 +54,6 @@ void createJunior(){
     junior = (Junior*) malloc(sizeof(Junior));
     junior->entity = initializeEntity(1, JR_X_INITIAL, JR_Y_INITIAL, JR_X_INITIAL, JR_Y_INITIAL, "junior",
                                       setBitmap("../sprites/jr.png"));
-    pushEntity(junior->entity);
     loadBitMaps(junior);
 }
 
@@ -181,7 +180,7 @@ void clientUpdate() {
 }
 
 char *serializeGame() {
-    json_value *obj = json_object_new((size_t) length);
+    json_value *obj = json_object_new((size_t) 2);
 
     json_value *game = json_integer_new(id);
     json_value *jsonEntities = serializeEntities(junior, donkey, platforms, key, ropes);
