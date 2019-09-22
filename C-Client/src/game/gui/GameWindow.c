@@ -2,6 +2,7 @@
 // Created by Erick Barrantes on 9/19/2019.
 //
 #include "GameWindow.h"
+#include "CollisionHandler.h"
 
 
 void createGameWindow(){
@@ -21,10 +22,13 @@ void createGameWindow(){
     createPlatforms();
     createRopes();
     donkey = initializeEntity(0, DK_X_POS, DK_Y_POS, DK_X_POS, DK_Y_POS, "donkey", setBitmap("../sprites/dk.png"));
+    key = initializeEntity(0, KEY_X_POS, KEY_Y_POS, KEY_X_POS, KEY_Y_POS, "key", setBitmap("../sprites/key.png"));
 
-    gameLoop(eventQueue);
+    int win = gameLoop(eventQueue);
 
     closeGameWindow(gameWindowDisplay, eventQueue);
+    if(win)
+        createGameWindow();
 }
 
 ALLEGRO_EVENT_QUEUE* setEventQueue(ALLEGRO_DISPLAY *gameWindowDisplay, ALLEGRO_TIMER *timer){
@@ -79,8 +83,8 @@ ALLEGRO_BITMAP* setBitmap(char* imgPath){
     return bitmap;
 }
 
-void gameLoop(ALLEGRO_EVENT_QUEUE *eventQueue){
-    int playing = TRUE, falling = FALSE, jumping = FALSE;
+int gameLoop(ALLEGRO_EVENT_QUEUE *eventQueue){
+    int playing = TRUE, falling = FALSE, jumping = FALSE, win = FALSE;
     float jumpCount = 0.0f;
     int timer = 0;
     ALLEGRO_KEYBOARD_STATE keyState;
@@ -93,8 +97,12 @@ void gameLoop(ALLEGRO_EVENT_QUEUE *eventQueue){
         moveJrLeft(junior, keyState);
         if(!jumping) falling = moveJrDown(junior, keyState, platforms, ropes);
         if(!falling) jumping = moveJrUp(junior, keyState, &jumpCount, jumping, platforms, ropes);
-
         timer++;
+
+        if(isCollindingWithKey(junior, key)){
+            win = TRUE;
+            playing = FALSE;
+        }
 
         if(junior->entity->y > GW_HEIGHT)
             playing = false;
@@ -103,7 +111,7 @@ void gameLoop(ALLEGRO_EVENT_QUEUE *eventQueue){
             clientUpdate();
             timer = 0;
         }
-    }
+    }return win;
 }
 
 int eventManager(ALLEGRO_EVENT_QUEUE *eventQueue){
@@ -127,17 +135,25 @@ void redrawDisplay(){
         drawBitmap(ropes[i]->entity);
     drawBitmap(junior->entity);
     drawBitmap(donkey);
+    drawBitmap(key);
     al_flip_display();
 }
 void closeGameWindow(ALLEGRO_DISPLAY *gameWindowDisplay, ALLEGRO_EVENT_QUEUE *eventQueue){
     al_destroy_display(gameWindowDisplay);
     al_uninstall_keyboard();
     al_destroy_bitmap(junior->entity->bitmap);
+    al_destroy_bitmap(donkey->bitmap);
+    al_destroy_bitmap(key->bitmap);
     al_destroy_event_queue(eventQueue);
-    free(junior);
     for(int i = 0; i < PLATFORMS_TOTAL; i++)
         free(platforms[i]);
+    for(int i = 0; i < AMOUNT_OF_ROPES; i++)
+        free(ropes[i]);
+    free(junior);
+    free(donkey);
+    free(key);
     free(platforms);
+    free(ropes);
 }
 
 void clientUpdate() {

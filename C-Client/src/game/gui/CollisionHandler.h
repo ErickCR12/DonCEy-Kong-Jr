@@ -11,5 +11,6 @@
 
 int isCollidingWithPlatform(Junior *junior, Platform **platforms);
 int isCollidingWithRope(Junior *junior, Rope **ropes);
+int isCollindingWithKey(Junior *junior, Entity *key);
 
 #endif //C_CLIENT_COLLISIONHANDLER_H

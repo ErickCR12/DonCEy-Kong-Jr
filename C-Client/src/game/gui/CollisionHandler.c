@@ -3,6 +3,7 @@
 //
 
 #include "CollisionHandler.h"
+#include <stdio.h>
 
 int isCollidingWithPlatform(Junior *junior, Platform **platforms){
     float xJr = junior->entity->x;
@@ -26,4 +27,14 @@ int isCollidingWithRope(Junior *junior, Rope **ropes){
             (yJr > yRope) && yJr < (yRope + ROPE_HEIGHT + 5))
             return TRUE;
     }return FALSE;
+}
+
+int isCollindingWithKey(Junior *junior, Entity *key){
+    float xJr = junior->entity->x;
+    float yJr = junior->entity->y;
+    float xKey = key->x;
+    float yKey = key->y;
+    if(xJr < (xKey + KEY_WIDTH) && (xJr + JR_WIDTH) > xKey && yKey > yJr && yKey < (yJr + JR_HEIGHT))
+        return TRUE;
+    return FALSE;
 }

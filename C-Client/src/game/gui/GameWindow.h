@@ -23,6 +23,7 @@
 Junior *junior;
 Entity *donkey;
 Platform **platforms;
+Entity *key;
 Rope **ropes;
 int id;
 
@@ -32,7 +33,7 @@ void createJunior();
 void createPlatforms();
 void createRopes();
 ALLEGRO_BITMAP* setBitmap(char* imgPath);
-void gameLoop(ALLEGRO_EVENT_QUEUE *eventQueue);
+int gameLoop(ALLEGRO_EVENT_QUEUE *eventQueue);
 int eventManager(ALLEGRO_EVENT_QUEUE *eventQueue);
 void redrawDisplay();
 void closeGameWindow(ALLEGRO_DISPLAY *gameWindowDisplay, ALLEGRO_EVENT_QUEUE *eventQueue);
