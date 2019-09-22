@@ -23,19 +23,24 @@
 Junior *junior;
 Entity *donkey;
 Platform **platforms;
+Entity *key;
 Rope **ropes;
 int id;
+ALLEGRO_EVENT_QUEUE *eventQueue;
 
 void createGameWindow();
+void startGame(ALLEGRO_DISPLAY *gameWindowDisplay);
+void initializeWidgets(ALLEGRO_DISPLAY *gameWindowDisplay);
 ALLEGRO_EVENT_QUEUE* setEventQueue(ALLEGRO_DISPLAY *gameWindowDisplay, ALLEGRO_TIMER *timer);
 void createJunior();
 void createPlatforms();
 void createRopes();
 ALLEGRO_BITMAP* setBitmap(char* imgPath);
-void gameLoop(ALLEGRO_EVENT_QUEUE *eventQueue);
-int eventManager(ALLEGRO_EVENT_QUEUE *eventQueue);
+int gameLoop();
+int eventManager();
 void redrawDisplay();
-void closeGameWindow(ALLEGRO_DISPLAY *gameWindowDisplay, ALLEGRO_EVENT_QUEUE *eventQueue);
+void deleteWidgets();
+void closeGameWindow(ALLEGRO_DISPLAY *gameWindowDisplay);
 void clientUpdate();
 char *serializeGame(json_value *);
 #endif //C_CLIENT_GAMEWINDOW_H

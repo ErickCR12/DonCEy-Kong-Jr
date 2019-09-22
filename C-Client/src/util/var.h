@@ -24,6 +24,11 @@
 #define DK_X_POS 40
 #define DK_Y_POS 0
 
+#define KEY_X_POS 260
+#define KEY_Y_POS 70
+#define KEY_WIDTH 43
+#define KEY_HEIGHT 50
+
 #define FPS 60
 #define MOV_SPEED 0.00040f
 #define GRAV_SPEED 0.00060f
