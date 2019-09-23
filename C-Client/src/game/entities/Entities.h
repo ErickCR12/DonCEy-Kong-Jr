@@ -8,14 +8,6 @@
 #include "Entity.h"
 #include "Junior.h"
 
-#define MAX_ENTITIES 30
-
-Entity *entities[MAX_ENTITIES];
-
-void pushEntity(Entity *);
-
-void removeEntity(int );
-
 /*
  * Junior, Donkey, platforms, key, ropes
  */

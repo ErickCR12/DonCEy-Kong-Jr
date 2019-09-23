@@ -155,7 +155,7 @@ int gameLoop(){
         if(isCollidingWithCroco(junior, crocos) || junior->entity->y > GW_HEIGHT)
             playing = FALSE;
 
-        if (timer > 30000) {
+        if (timer > 300000) {
             clientUpdate();
             timer = 0;
         }
