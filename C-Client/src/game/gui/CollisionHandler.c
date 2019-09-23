@@ -45,7 +45,7 @@ int isCollidingWithCroco(Junior *junior, LinkedList *crocos){
     for(Node *crocoNode = crocos->head; crocoNode != NULL; crocoNode = crocoNode->nextNode){
         float xCroco = crocoNode->croco->entity->x;
         float yCroco = crocoNode->croco->entity->y;
-        if (xJr < xCroco && (xJr + JR_WIDTH) > (xCroco + CROCO_WIDTH) &&
+        if ((xJr + JR_WIDTH) > xCroco && xJr < (xCroco + CROCO_WIDTH) &&
                 (yCroco + CROCO_HEIGHT) > yJr && yCroco < (yJr + JR_HEIGHT))
             return TRUE;
     }return FALSE;
