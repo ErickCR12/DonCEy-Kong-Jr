@@ -7,10 +7,14 @@
 
 #include "../../util/var.h"
 #include "Entity.h"
+#include "Rope.h"
 
 typedef struct {
     Entity *entity;
-} Croco
-;
+    int isRedCroco;
+    Rope *rope;
+} Croco;
+
+void moveCroco(Croco *croco);
 
 #endif //C_CLIENT_CROCO_H

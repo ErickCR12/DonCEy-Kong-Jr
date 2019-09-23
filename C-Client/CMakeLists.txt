@@ -38,7 +38,7 @@ add_executable(C-Client
         src/datastructures/LinkedList.c
         src/datastructures/Node.c
         src/game/entities/Platform.c
-        src/game/entities/Rope.c)
+        src/game/entities/Rope.c src/game/entities/Croco.c)
 
 
 # build
