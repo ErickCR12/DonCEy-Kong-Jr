@@ -139,8 +139,12 @@ int gameLoop(){
         moveJrLeft(junior, keyState);
         if(!jumping) falling = moveJrDown(junior, keyState, platforms, ropes);
         if(!falling) jumping = moveJrUp(junior, keyState, &jumpCount, jumping, platforms, ropes);
-        for(Node *crocoNode = crocos->head; crocoNode != NULL; crocoNode = crocoNode->nextNode)
-            moveCroco(crocoNode->croco);
+        for(Node *crocoNode = crocos->head; crocoNode != NULL; crocoNode = crocoNode->nextNode) {
+            if(((Croco*)crocoNode->data)->entity->y < GW_HEIGHT)
+                moveCroco(crocoNode->data);
+            else
+                deleteNode(crocos, crocoNode);
+        }
         animate(junior);
         timer++;
 
@@ -179,7 +183,7 @@ void redrawDisplay(){
     for(int i = 0; i < AMOUNT_OF_ROPES; i++)
         drawBitmap(ropes[i]->entity);
     for(Node *node = crocos->head; node != NULL; node = node->nextNode)
-        drawBitmap(node->croco->entity);
+        drawBitmap(((Croco*)node->data)->entity);
     drawBitmap(junior->entity);
     drawBitmap(donkey);
     drawBitmap(key);

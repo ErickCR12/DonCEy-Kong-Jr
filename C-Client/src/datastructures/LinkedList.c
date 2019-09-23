@@ -23,8 +23,20 @@ void insertNode(LinkedList *list, Node* node){
     }list->amountOfNodes++;
 }
 
-void deleteNode(LinkedList *list, Node* node){
-    
+void deleteNode(LinkedList *list, Node *node){
+    Node *temp = list->head;
+    Node *nodeToDelete;
+    if(temp == node){
+        nodeToDelete = temp;
+        list->head = node->nextNode;
+        free(nodeToDelete);
+    }else{
+        while(temp->nextNode != node)
+            temp = temp->nextNode;
+        nodeToDelete = temp->nextNode;
+        temp->nextNode = nodeToDelete->nextNode;
+        free(nodeToDelete);
+    }
 }
 
 int size(LinkedList *list) {
