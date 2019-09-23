@@ -37,7 +37,7 @@ ALLEGRO_EVENT_QUEUE *eventQueue;
 void createGameWindow();
 //Recursive function that calls the game loop. If the player won, it calls startGame recursively. If the player losses,
 //it calls closeGameWindow and the app closes.
-void startGame(ALLEGRO_DISPLAY *gameWindowDisplay);
+void startGame(ALLEGRO_DISPLAY *gameWindowDisplay, int difficulty);
 //Calls all the functions that creates all the initial widgets in their initial positions. This includes Jr, DK,
 //platforms, ropes and the key.
 void initializeWidgets(ALLEGRO_DISPLAY *gameWindowDisplay);
@@ -50,7 +50,7 @@ void createCroco(int ropeNumber, int isRedCroco, int id);
 void createFruit(int ropeNumber, int id);
 int getRopePosition(int ropeColumn);
 ALLEGRO_BITMAP* setBitmap(char* imgPath);
-int gameLoop();
+int gameLoop(int difficulty);
 int eventManager();
 void redrawDisplay();
 void deleteWidgets();

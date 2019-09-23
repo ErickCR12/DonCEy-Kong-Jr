@@ -15,6 +15,6 @@ typedef struct {
     Rope *rope;
 } Croco;
 
-void moveCroco(Croco *croco);
+void moveCroco(Croco *croco, int difficulty);
 
 #endif //C_CLIENT_CROCO_H

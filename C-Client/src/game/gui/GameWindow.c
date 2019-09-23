@@ -9,15 +9,15 @@ void createGameWindow(){
     al_init();
     gameWindowDisplay = al_create_display(GW_WIDTH, GW_HEIGHT);
 
-    startGame(gameWindowDisplay);
+    startGame(gameWindowDisplay, 1);
 }
 
-void startGame(ALLEGRO_DISPLAY *gameWindowDisplay){
+void startGame(ALLEGRO_DISPLAY *gameWindowDisplay, int difficulty){
     initializeWidgets(gameWindowDisplay);
-    int win = gameLoop(eventQueue);
+    int win = gameLoop(difficulty);
     deleteWidgets();
     if(win)
-        startGame(gameWindowDisplay);
+        startGame(gameWindowDisplay, ++difficulty);
     else
         closeGameWindow(gameWindowDisplay);
 }
@@ -39,6 +39,7 @@ void initializeWidgets(ALLEGRO_DISPLAY *gameWindowDisplay){
 
     crocosList = crocos;
     fruitsList = fruits;
+    createCroco(8, FALSE, 0);
 
     donkey = initializeEntity(0, DK_X_POS, DK_Y_POS, DK_X_POS, DK_Y_POS, "donkey", setBitmap("../sprites/dk.png"));
     key = initializeEntity(0, KEY_X_POS, KEY_Y_POS, KEY_X_POS, KEY_Y_POS, "key", setBitmap("../sprites/key.png"));
@@ -157,7 +158,7 @@ ALLEGRO_BITMAP* setBitmap(char* imgPath){
     return bitmap;
 }
 
-int gameLoop(){
+int gameLoop(int difficulty){
     int playing = TRUE, falling = FALSE, jumping = FALSE, win = FALSE;
     float jumpCount = 0.0f;
     int timer = 0;
@@ -175,7 +176,7 @@ int gameLoop(){
         if(!falling) jumping = moveJrUp(junior, keyState, &jumpCount, jumping, platforms, ropes);
         for(Node *crocoNode = crocos->head; crocoNode != NULL; crocoNode = crocoNode->nextNode) {
             if(((Croco*)crocoNode->data)->entity->y < GW_HEIGHT)
-                moveCroco(crocoNode->data);
+                moveCroco(crocoNode->data, difficulty);
             else
                 deleteNode(crocos, crocoNode);
         }
