@@ -21,7 +21,7 @@ void socksInit() {
 
 int main(){
     // Some Initializations
-    socksInit();
+    // socksInit();
 
     // Game
     createGameWindow();

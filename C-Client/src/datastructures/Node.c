@@ -4,9 +4,9 @@
 
 #include "Node.h"
 
-Node* initializeNode(Croco *croco){
+Node* initializeNode(void *data){
     Node *node = (Node*) malloc(sizeof(Node));
     node->nextNode = NULL;
-    node->croco = croco;
+    node->data = data;
     return node;
 }

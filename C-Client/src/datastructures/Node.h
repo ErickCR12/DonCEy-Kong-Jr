@@ -11,9 +11,9 @@ typedef struct Node Node;
 
 struct Node{
   Node *nextNode;
-  Croco *croco;
+  void *data;
 };
 
-Node *initializeNode(Croco *croco);
+Node *initializeNode(void *data);
 
 #endif //C_CLIENT_NODE_H

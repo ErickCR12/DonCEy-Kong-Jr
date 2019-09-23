@@ -38,3 +38,15 @@ int isCollindingWithKey(Junior *junior, Entity *key){
         return TRUE;
     return FALSE;
 }
+
+int isCollidingWithCroco(Junior *junior, LinkedList *crocos){
+    float xJr = junior->entity->x;
+    float yJr = junior->entity->y;
+    for(Node *crocoNode = crocos->head; crocoNode != NULL; crocoNode = crocoNode->nextNode){
+        float xCroco = ((Croco*)crocoNode->data)->entity->x;
+        float yCroco = ((Croco*)crocoNode->data)->entity->y;
+        if ((xJr + JR_WIDTH) > xCroco && xJr < (xCroco + CROCO_WIDTH) &&
+                (yCroco + CROCO_HEIGHT) > yJr && yCroco < (yJr + JR_HEIGHT))
+            return TRUE;
+    }return FALSE;
+}

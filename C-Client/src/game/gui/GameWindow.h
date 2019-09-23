@@ -27,6 +27,7 @@ Rope **ropes;
 LinkedList *crocos;
 Entity *key;
 int id;
+int ropeAmount;
 ALLEGRO_EVENT_QUEUE *eventQueue;
 
 void createGameWindow();
@@ -36,6 +37,8 @@ ALLEGRO_EVENT_QUEUE* setEventQueue(ALLEGRO_DISPLAY *gameWindowDisplay, ALLEGRO_T
 void createJunior();
 void createPlatforms();
 void createRopes();
+void createCroco(int ropeNumber, int isRedCroco);
+int getRopePosition(int ropeColumn);
 ALLEGRO_BITMAP* setBitmap(char* imgPath);
 int gameLoop();
 int eventManager();

@@ -7,7 +7,7 @@
 LinkedList *initializeList(){
     LinkedList *list = (LinkedList*) malloc(sizeof(LinkedList));
     list->head = NULL;
-    list->amountOfCrocos = 0;
+    list->amountOfNodes = 0;
     return list;
 }
 
@@ -20,11 +20,23 @@ void insertNode(LinkedList *list, Node* node){
         while(lastNode->nextNode != NULL)
             lastNode = lastNode->nextNode;
         lastNode->nextNode = node;
-    }list->amountOfCrocos++;
+    }list->amountOfNodes++;
 }
 
-void deleteNode(LinkedList *list, Node* node){
-
+void deleteNode(LinkedList *list, Node *node){
+    Node *temp = list->head;
+    Node *nodeToDelete;
+    if(temp == node){
+        nodeToDelete = temp;
+        list->head = node->nextNode;
+        free(nodeToDelete);
+    }else{
+        while(temp->nextNode != node)
+            temp = temp->nextNode;
+        nodeToDelete = temp->nextNode;
+        temp->nextNode = nodeToDelete->nextNode;
+        free(nodeToDelete);
+    }
 }
 
 int size(LinkedList *list) {

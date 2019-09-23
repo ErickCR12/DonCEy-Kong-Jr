@@ -14,8 +14,12 @@
 #define PLATFORM_HEIGHT 25
 #define JR_WIDTH 100.0f
 #define JR_HEIGHT 57.0f
-#define ROPE_WIDTH 35
-#define ROPE_HEIGHT 50
+#define ROPE_WIDTH 35.0f
+#define ROPE_HEIGHT 50.0f
+#define KEY_WIDTH 43.0f
+#define KEY_HEIGHT 50.0f
+#define CROCO_WIDTH 40.0f
+#define CROCO_HEIGHT 21.0f
 
 #define JR_X_INITIAL 15
 #define JR_Y_INITIAL 420
@@ -26,8 +30,10 @@
 
 #define KEY_X_POS 260
 #define KEY_Y_POS 70
-#define KEY_WIDTH 43
-#define KEY_HEIGHT 50
+
+#define CROCO_X_POS 0
+#define CROCO_Y_POS 100
+#define CROCO_SPEED 0.00020f
 
 #define FPS 60
 #define MOV_SPEED 0.00040f

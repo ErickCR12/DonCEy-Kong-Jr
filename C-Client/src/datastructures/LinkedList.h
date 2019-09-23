@@ -9,7 +9,7 @@
 
 typedef struct{
     Node *head;
-    int amountOfCrocos;
+    int amountOfNodes;
 }LinkedList;
 
 LinkedList *initializeList();

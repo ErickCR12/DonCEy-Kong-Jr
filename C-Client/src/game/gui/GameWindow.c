@@ -36,6 +36,8 @@ void initializeWidgets(ALLEGRO_DISPLAY *gameWindowDisplay){
     createPlatforms();
     createRopes();
     crocos = initializeList();
+    createCroco(2, FALSE);
+
     donkey = initializeEntity(0, DK_X_POS, DK_Y_POS, DK_X_POS, DK_Y_POS, "donkey", setBitmap("../sprites/dk.png"));
     key = initializeEntity(0, KEY_X_POS, KEY_Y_POS, KEY_X_POS, KEY_Y_POS, "key", setBitmap("../sprites/key.png"));
 }
@@ -85,6 +87,35 @@ void createRopes(){
     free(imgPath);
 }
 
+void createCroco(int ropeNumber, int isRedCroco){
+    Croco *croco = (Croco*) malloc(sizeof(Croco));
+    char *imgPath;
+    if(isRedCroco)
+        imgPath = "../sprites/redcroco.png";
+    else
+        imgPath = "../sprites/bluecroco.png";
+    croco->entity = initializeEntity(1, CROCO_X_POS, CROCO_Y_POS, CROCO_X_POS, CROCO_Y_POS, "croco",
+                                      setBitmap(imgPath));
+    croco->isRedCroco = isRedCroco;
+    croco->rope = ropes[getRopePosition(ropeNumber)];
+    Node *node = initializeNode(croco);
+    insertNode(crocos, node);
+}
+
+int getRopePosition(int ropeColumn){
+    float prevX = -1.0f;
+    int ropeNumber = -1;
+    for(int i = 0; i < AMOUNT_OF_ROPES; i++){
+        if(prevX != ropes[i]->entity->x){
+            prevX = ropes[i]->entity->x;
+            ropeNumber++;
+        }
+        if(ropeNumber == ropeColumn)
+            return i;
+    }
+    return  -1;
+}
+
 ALLEGRO_BITMAP* setBitmap(char* imgPath){
     ALLEGRO_BITMAP *bitmap = NULL;
     bitmap = al_load_bitmap(imgPath);
@@ -107,6 +138,12 @@ int gameLoop(){
         moveJrLeft(junior, keyState);
         if(!jumping) falling = moveJrDown(junior, keyState, platforms, ropes);
         if(!falling) jumping = moveJrUp(junior, keyState, &jumpCount, jumping, platforms, ropes);
+        for(Node *crocoNode = crocos->head; crocoNode != NULL; crocoNode = crocoNode->nextNode) {
+            if(((Croco*)crocoNode->data)->entity->y < GW_HEIGHT)
+                moveCroco(crocoNode->data);
+            else
+                deleteNode(crocos, crocoNode);
+        }
         animate(junior);
         timer++;
 
@@ -115,8 +152,8 @@ int gameLoop(){
             playing = FALSE;
         }
 
-        if(junior->entity->y > GW_HEIGHT)
-            playing = false;
+        if(isCollidingWithCroco(junior, crocos) || junior->entity->y > GW_HEIGHT)
+            playing = FALSE;
 
         if (timer > 30000) {
             clientUpdate();
@@ -144,6 +181,8 @@ void redrawDisplay(){
         drawBitmap(platforms[i]->entity);
     for(int i = 0; i < AMOUNT_OF_ROPES; i++)
         drawBitmap(ropes[i]->entity);
+    for(Node *node = crocos->head; node != NULL; node = node->nextNode)
+        drawBitmap(((Croco*)node->data)->entity);
     drawBitmap(junior->entity);
     drawBitmap(donkey);
     drawBitmap(key);
