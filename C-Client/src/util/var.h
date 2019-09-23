@@ -10,8 +10,8 @@
 
 #define GW_WIDTH 1200
 #define GW_HEIGHT 600
-#define PLATFORM_WIDTH 50
-#define PLATFORM_HEIGHT 25
+#define PLATFORM_WIDTH 50.0f
+#define PLATFORM_HEIGHT 25.0f
 #define JR_WIDTH 100.0f
 #define JR_HEIGHT 57.0f
 #define DONKEY_WIDTH 190.0f

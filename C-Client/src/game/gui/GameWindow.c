@@ -82,8 +82,8 @@ void createPlatforms(){
         }
         platforms[i] = initializePlatform(i+2, x, y, x, y, "platform", setBitmap(imgPath), PLATFORM_WIDTH,
                                            PLATFORM_HEIGHT);
-        platforms[i]->width = PLATFORM_WIDTH;
-        platforms[i]->height = PLATFORM_HEIGHT;
+        platforms[i]->entity->width = PLATFORM_WIDTH;
+        platforms[i]->entity->height = PLATFORM_HEIGHT;
     }
 }
 

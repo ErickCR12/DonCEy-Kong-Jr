@@ -9,6 +9,8 @@ public class Entity {
     private float rx;
     private float ry;
     private String type;
+    private float width;
+    private float height;
 
     void parse(String json) {
         JSONObject jsonObject = new JSONObject(json);
@@ -16,6 +18,8 @@ public class Entity {
         rx = jsonObject.getFloat("x");
         ry = jsonObject.getFloat("y");
         type = jsonObject.getString("type");
+        width = jsonObject.getFloat("width");
+        height = jsonObject.getFloat("height");
     }
 
     public int getId() {
@@ -64,5 +68,21 @@ public class Entity {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public float getWidth() {
+        return width;
+    }
+
+    public void setWidth(float width) {
+        this.width = width;
+    }
+
+    public float getHeight() {
+        return height;
+    }
+
+    public void setHeight(float height) {
+        this.height = height;
     }
 }

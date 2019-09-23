@@ -37,7 +37,8 @@ public class GameView extends Pane {
             float y = entity.getRy() * height;
 
             ImageView imgView = chooseImg(entity, x, y);
-
+            if (entity.getType().equals("rope")) continue;
+            
             this.getChildren().add(imgView);
         }
     }
@@ -62,14 +63,16 @@ public class GameView extends Pane {
                 break;
             case "platform":
                 url = "cube.png";
+                break;
             case "rope":
                 url = "cube.png";
+                return null;
         }
 
         ImageView imgView = new ImageView(url);
         imgView.relocate(x, y);
-        imgView.setFitWidth(50);
-        imgView.setFitHeight(50);
+        imgView.setFitWidth(entity.getWidth());
+        imgView.setFitHeight(entity.getHeight());
         if(entity.getType().equals("rope") || entity.getType().equals("platform"))
             imgView.setStyle("-fx-opacity: 0.5");
 
