@@ -6,9 +6,11 @@
 #define C_CLIENT_FRUIT_H
 
 #include "Entity.h"
+#include "Rope.h"
 
 typedef struct {
-    Entity entity;
+    Entity *entity;
+    Rope *rope;
 } Fruit;
 
 #endif //C_CLIENT_FRUIT_H

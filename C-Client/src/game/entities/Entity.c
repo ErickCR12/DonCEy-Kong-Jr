@@ -4,7 +4,7 @@
 
 #include <stdio.h>
 #include "Entity.h"
-#include "../../lib/json.h"
+#include "../../json/json.h"
 
 Entity* initializeEntity(int id, float x, float y, float rx, float ry, char *type, ALLEGRO_BITMAP *bitmap){
     Entity *entity = (Entity*) malloc(sizeof(Entity));

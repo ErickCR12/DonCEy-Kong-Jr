@@ -6,13 +6,16 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import ui.widgets.ClientTab;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ClientsMenu {
 
     @FXML
     public JFXTabPane clientsTabPane;
 
     private Game game;
-    private ClientTab clientTab;
+    private List<ClientTab> clientsTab = new ArrayList<>();
 
     @FXML
     public void clientsLabelPressed() {
@@ -20,19 +23,31 @@ public class ClientsMenu {
     }
 
     public void createClientTab(String name) {
-        clientTab = new ClientTab(name);
+        ClientTab clientTab = new ClientTab(name);
+        clientTab.setGameId(name);
         clientTab.load();
 
+        clientsTab.add(clientTab);
         clientsTabPane.getTabs().add(clientTab);
     }
 
     public void updateGameView() {
         Platform.runLater(() -> {
-            clientTab.getGameView().update(game);
+            for (ClientTab clientTab : clientsTab) {
+                if (clientTab == null) continue;
+                if (clientTab.getGameId().equals(game.getId().toString())) {
+                    clientTab.updateGameView(game);
+                    break;
+                }
+            }
         });
     }
 
     public void setGame(Game game) {
         this.game = game;
+    }
+
+    public List<ClientTab> getClientsTab() {
+        return clientsTab;
     }
 }

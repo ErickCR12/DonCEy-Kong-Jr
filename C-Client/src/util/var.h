@@ -16,18 +16,20 @@
 #define JR_HEIGHT 57.0f
 #define DONKEY_WIDTH 190.0f
 #define DONKEY_HEIGHT 122.0f
-#define ROPE_WIDTH 35.0f
+#define ROPE_WIDTH 25.0f
 #define ROPE_HEIGHT 50.0f
 #define KEY_WIDTH 43.0f
 #define KEY_HEIGHT 50.0f
 #define CROCO_WIDTH 40.0f
 #define CROCO_HEIGHT 21.0f
+#define FRUIT_WIDTH 30.0f
+#define FRUIT_HEIGHT 23.0f
 
 #define JR_X_INITIAL 15
 #define JR_Y_INITIAL 420
 #define JR_ANIM_TIME 100000
 
-#define DK_X_POS 40
+#define DK_X_POS 50
 #define DK_Y_POS 0
 
 #define KEY_X_POS 260
@@ -69,6 +71,7 @@ static float PLATFORM2_Y_POS[] = {120, 120, 120, 120, 120, 120, 120, 120, 120, 1
                                  320, 320,
                                  50};
 
+#define ROPE_COLUMNS 9
 #define AMOUNT_OF_ROPES 32
 
 static float ROPE_X_POSITION[] = {40, 40, 40, 40, 40,

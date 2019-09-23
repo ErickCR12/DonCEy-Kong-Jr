@@ -8,8 +8,8 @@
 #include <stdlib.h>
 #include "../../util/var.h"
 #include <allegro5/allegro.h>
-#include "../../lib/json.h"
-#include "../../lib/json-builder.h"
+#include "../../json/json.h"
+#include "../../json/json-builder.h"
 
 typedef struct {
     int id;

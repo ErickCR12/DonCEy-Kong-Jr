@@ -3,6 +3,7 @@
 //
 
 #include "LinkedList.h"
+#include <stdio.h>
 
 LinkedList *initializeList(){
     LinkedList *list = (LinkedList*) malloc(sizeof(LinkedList));
@@ -36,7 +37,7 @@ void deleteNode(LinkedList *list, Node *node){
         nodeToDelete = temp->nextNode;
         temp->nextNode = nodeToDelete->nextNode;
         free(nodeToDelete);
-    }
+    }list->amountOfNodes--;
 }
 
 int size(LinkedList *list) {

@@ -3,6 +3,10 @@ package server;
 import java.io.IOException;
 import java.net.ServerSocket;
 
+/**
+ * Server listen for incoming IOStream requests
+ * @author José Acuña
+ */
 public class Server extends Thread {
 
     private static Server instance;
@@ -31,6 +35,10 @@ public class Server extends Thread {
         }
     }
 
+    /**
+     * Creates a Thread for the client connected
+     * @throws IOException in case the Thread or Socket fail to start
+     */
     private void startListening() throws IOException {
         while (true) {
             System.out.println("Waiting client...");

@@ -30,14 +30,16 @@ public class Game {
         JSONObject jsonDonkey = jsonEntities.getJSONObject("donkey");
         Entity donkey = new Entity();
         donkey.parse(jsonDonkey.toString());
+
+        // Parse Arrays
         parseArray(jsonEntities.getJSONArray("platforms"));
         parseArray(jsonEntities.getJSONArray("ropes"));
+        parseArray(jsonEntities.getJSONArray("crocos"));
+        parseArray(jsonEntities.getJSONArray("fruits"));
 
         entities.add(junior);
         entities.add(key);
         entities.add(donkey);
-
-
     }
 
     private void parseArray(JSONArray jsonArray) {

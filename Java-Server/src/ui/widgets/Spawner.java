@@ -2,6 +2,8 @@ package ui.widgets;
 
 
 import com.jfoenix.controls.JFXButton;
+import game.Croco;
+import game.Fruit;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -13,6 +15,8 @@ public class Spawner extends Pane {
     private Image icon;
     private Integer width;
     private Integer height;
+    private String type;
+    private ClientTab clientTab;
     private String css;
 
     public Spawner(Image icon) {
@@ -62,5 +66,32 @@ public class Spawner extends Pane {
 
     private void mouseEvent(Integer button) {
         System.out.printf("Spawner button pressed: %d \n", button);
+        Integer size;
+        switch (type) {
+            case "croco":
+                size = clientTab.getCrocos().size();
+                clientTab.getCrocos().add(size, new Croco(size, "croco", button));
+                break;
+            case "fruit":
+                size = clientTab.getFruits().size();
+                clientTab.getFruits().add(size, new Fruit(size, "fruit", button));
+                break;
+        }
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public ClientTab getClientTab() {
+        return clientTab;
+    }
+
+    public void setClientTab(ClientTab clientTab) {
+        this.clientTab = clientTab;
     }
 }

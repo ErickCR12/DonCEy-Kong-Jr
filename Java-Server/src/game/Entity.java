@@ -3,14 +3,36 @@ package game;
 import org.json.JSONObject;
 
 public class Entity {
-    private int id;
+    protected int id;
+    protected String type;
     private float x;
     private float y;
     private float rx;
     private float ry;
-    private String type;
     private float width;
     private float height;
+
+    public Entity() {
+        this.id = 0;
+        this.type = "";
+        this.x = 0;
+        this.y = 0;
+        this.rx = 0;
+        this.ry = 0;
+        this.width = 0;
+        this.height = 0;
+    }
+
+    public Entity(Integer id, String type) {
+        this.id = id;
+        this.type = type;
+        this.x = 0;
+        this.y = 0;
+        this.rx = 0;
+        this.ry = 0;
+        this.width = 0;
+        this.height = 0;
+    }
 
     void parse(String json) {
         JSONObject jsonObject = new JSONObject(json);
