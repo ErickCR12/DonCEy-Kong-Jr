@@ -48,12 +48,16 @@ json_value *serialize(Entity *entity) {
     json_value *x = json_double_new(entity->rx);
     json_value *y = json_double_new(entity->ry);
     json_value *type = json_string_new(entity->type);
+    json_value *width = json_double_new(entity->width);
+    json_value *height = json_double_new(entity->height);
 
     json_value *obj = json_object_new(3);
     json_object_push(obj, "id", id);
     json_object_push(obj, "x", x);
     json_object_push(obj, "y", y);
     json_object_push(obj, "type", type);
+    json_object_push(obj, "width", width);
+    json_object_push(obj, "height", height);
 
     //json_char *buf = malloc(json_measure(obj));
     //json_serialize(buf, obj);

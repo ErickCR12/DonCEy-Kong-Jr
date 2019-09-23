@@ -40,6 +40,11 @@ void initializeWidgets(ALLEGRO_DISPLAY *gameWindowDisplay){
 
     donkey = initializeEntity(0, DK_X_POS, DK_Y_POS, DK_X_POS, DK_Y_POS, "donkey", setBitmap("../sprites/dk.png"));
     key = initializeEntity(0, KEY_X_POS, KEY_Y_POS, KEY_X_POS, KEY_Y_POS, "key", setBitmap("../sprites/key.png"));
+
+    donkey->width = DONKEY_WIDTH;
+    donkey->height = DONKEY_HEIGHT;
+    key->width = KEY_WIDTH;
+    key->height = KEY_HEIGHT;
 }
 
 ALLEGRO_EVENT_QUEUE* setEventQueue(ALLEGRO_DISPLAY *gameWindowDisplay, ALLEGRO_TIMER *timer){
@@ -56,6 +61,8 @@ void createJunior(){
     junior = (Junior*) malloc(sizeof(Junior));
     junior->entity = initializeEntity(1, JR_X_INITIAL, JR_Y_INITIAL, JR_X_INITIAL, JR_Y_INITIAL, "junior",
                                       setBitmap("../sprites/jr.png"));
+    junior->entity->width = JR_WIDTH;
+    junior->entity->height = JR_HEIGHT;
     loadBitMaps(junior);
 }
 
@@ -75,15 +82,20 @@ void createPlatforms(){
         }
         platforms[i] = initializePlatform(i+2, x, y, x, y, "platform", setBitmap(imgPath), PLATFORM_WIDTH,
                                            PLATFORM_HEIGHT);
+        platforms[i]->width = PLATFORM_WIDTH;
+        platforms[i]->height = PLATFORM_HEIGHT;
     }
 }
 
 void createRopes(){
     ropes = (Rope**) malloc(AMOUNT_OF_ROPES * sizeof(Rope*));
     char* imgPath = "../sprites/rope.png";
-    for(int i = 0; i < AMOUNT_OF_ROPES; i++)
+    for(int i = 0; i < AMOUNT_OF_ROPES; i++) {
         ropes[i] = initializeRope(0, ROPE_X_POSITION[i], ROPE_Y_POSITION[i], ROPE_X_POSITION[i], ROPE_Y_POSITION[i],
                                   "rope", setBitmap(imgPath), ROPE_WIDTH, ROPE_HEIGHT);
+        ropes[i]->width = ROPE_WIDTH;
+        ropes[i]->height = ROPE_HEIGHT;
+    }
     free(imgPath);
 }
 
@@ -96,6 +108,8 @@ void createCroco(int ropeNumber, int isRedCroco){
         imgPath = "../sprites/bluecroco.png";
     croco->entity = initializeEntity(1, CROCO_X_POS, CROCO_Y_POS, CROCO_X_POS, CROCO_Y_POS, "croco",
                                       setBitmap(imgPath));
+    croco->entity->width = CROCO_WIDTH;
+    croco->entity->height = CROCO_HEIGHT;
     croco->isRedCroco = isRedCroco;
     croco->rope = ropes[getRopePosition(ropeNumber)];
     Node *node = initializeNode(croco);
